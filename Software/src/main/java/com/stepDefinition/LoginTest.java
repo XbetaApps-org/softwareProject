@@ -4,6 +4,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 public class LoginTest {
+	public LoginTest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Given("user navigates to the website javatpoint.com")
 	public void user_navigates_to_the_website_javatpoint_com() {
 	    // Write code here that turns the phrase above into concrete actions
