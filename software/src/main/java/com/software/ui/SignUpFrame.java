@@ -1,5 +1,12 @@
 package com.software.ui;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -21,8 +28,8 @@ public class SignUpFrame extends javax.swing.JFrame {
         initComponents();
     }
 
-    private List<User> registeredUsers = new ArrayList<>();
-    private User newUser;
+   // private List<User> registeredUsers = new ArrayList<>();
+    //private User newUser;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -230,37 +237,60 @@ public class SignUpFrame extends javax.swing.JFrame {
     }                                          
 
     private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    	String username = userNameField.getText();
+        String username = userNameField.getText();
         String password = new String(PasswordField.getPassword());
         String confirmPassword = new String(PasswordConfirmField.getPassword());
         String email = EmailField.getText();
+        String USERS_FILE = "users.txt";
 
-        // تحقق من تطابق كلمات المرور
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(this, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
-            message="Passwords do not match";
+            message = "Passwords do not match";
             return;
         }
 
-        // تحقق من وجود المستخدم بالفعل
-        boolean userExists = registeredUsers.stream()
-            .anyMatch(user -> user.getUsername().equals(username) || user.getEmail().equals(email));
+        
+        boolean userExists = userExists(USERS_FILE, username, email);
 
         if (userExists) {
             JOptionPane.showMessageDialog(this, "User already exists", "Error", JOptionPane.ERROR_MESSAGE);
-            message="User already exists";
+            message = "User already exists";
         } else if (!isValidEmail(email)) {
-            // تحقق من صحة البريد الإلكتروني
             JOptionPane.showMessageDialog(this, "Invalid email format", "Error", JOptionPane.ERROR_MESSAGE);
-            message="Invalid email format";
+            message = "Invalid email format";
         } else {
-            // إنشاء مستخدم جديد وإضافته إلى القائمة
-            newUser = new User(username, password, email);
-            registeredUsers.add(newUser);
-            JOptionPane.showMessageDialog(this, "Thank you for signing up", "Success", JOptionPane.INFORMATION_MESSAGE);
-            message="Thank you for signing up";
+        	String hashedPassword = hashPassword(password);
+
+            // Append new user to the file
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(USERS_FILE, true))) {
+                bw.write(username + " " + email + " " + hashedPassword);
+                bw.newLine();
+                WelcomeFrame welcomeFrame = new WelcomeFrame();
+                
+                welcomeFrame.setVisible(true);
+            this.dispose();
+               // JOptionPane.showMessageDialog(this, "Thank you for signing up", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    private boolean userExists(String fileName, String username, String email) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(" ");
+                if (parts.length == 3) {
+                    if (parts[0].equals(username) || parts[1].equals(email)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private boolean isValidEmail(String email) {
@@ -355,4 +385,18 @@ public class SignUpFrame extends javax.swing.JFrame {
 		SignUpButtonActionPerformed(null);
 		
 	}
+	private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : messageDigest) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
