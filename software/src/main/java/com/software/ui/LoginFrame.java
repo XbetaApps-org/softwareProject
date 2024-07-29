@@ -36,8 +36,8 @@ public class LoginFrame extends javax.swing.JFrame {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(" ");
-                if (parts.length == 3) {
-                    userList.add(new User(parts[0], parts[1], parts[2]));
+                if (parts.length == 4) {
+                    userList.add(new User(parts[0], parts[1], parts[2], parts[3]));
                 }
             }
         } catch (IOException e) {
