@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author LOQ
  */
-public class SendFeedBack extends javax.swing.JFrame {
+public class SendFeedBackFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form SendFeedBack
      */
-    public SendFeedBack() {
+    public SendFeedBackFrame() {
         initComponents();
     }
 
@@ -38,6 +38,7 @@ public class SendFeedBack extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         FeedBackArea = new javax.swing.JTextArea();
+        backButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -70,13 +71,28 @@ public class SendFeedBack extends javax.swing.JFrame {
         FeedBackArea.setRows(5);
         jScrollPane1.setViewportView(FeedBackArea);
 
+        backButton.setBackground(new java.awt.Color(51, 102, 255));
+        backButton.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
+        backButton.setForeground(new java.awt.Color(255, 255, 255));
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -88,8 +104,13 @@ public class SendFeedBack extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -156,16 +177,23 @@ public class SendFeedBack extends javax.swing.JFrame {
         // Append the feedback to the file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("feedBacks.txt", true))) {
         	FeedBackArea.setText("");
-        	JOptionPane.showMessageDialog(this,"your feedBack is sended succesfully");
+        	JOptionPane.showMessageDialog(this,"your feedback is sent successfully");
             writer.write(formattedFeedback);
-        //    NonAdminIndex nonAdminIndex = new NonAdminIndex();
-        //    nonAdminIndex.setVisible(true);
+            message="your feedback is sent successfully";
+            NonAdminIndex nonAdminIndex = new NonAdminIndex();
+          nonAdminIndex.setVisible(true);
             this.dispose();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-                                         
+    }                                          
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+       
+    NonAdminIndex nonAdminIndex = new NonAdminIndex();
+            nonAdminIndex.setVisible(true);
+            this.dispose();message="you are going back";
+    }                                          
 
     /**
      * @param args the command line arguments
@@ -184,32 +212,37 @@ public class SendFeedBack extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SendFeedBack.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SendFeedBackFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SendFeedBack.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SendFeedBackFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SendFeedBack.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SendFeedBackFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SendFeedBack.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SendFeedBackFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SendFeedBack().setVisible(true);
+                new SendFeedBackFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JTextArea FeedBackArea;
+    public javax.swing.JTextArea FeedBackArea;
+    public javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton sendButton;
-    // End of variables declaration                   
+    public javax.swing.JButton sendButton;
+    private String message;
+    // End of variables declaration 
+    public String getMessage() {
+    	return message;
+    }
 }
