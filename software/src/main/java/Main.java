@@ -1,4 +1,3 @@
-
 import com.software.ui.WelcomeFrame;
 
 public class Main {

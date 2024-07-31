@@ -68,6 +68,7 @@ public class LoginFrame extends javax.swing.JFrame {
             	
                 if (user.getUsername().equals(username) && user.getPassword().equals(hashedPassword)) {
                     message="Login successful as " + userType;
+                    User loged = new User(username, password, hashedPassword, userType);
                 	Index index =new Index();
                 	index.setVisible(true);
                     //JOptionPane.showMessageDialog(this, "Login successful as " + userType);
