@@ -55,7 +55,10 @@ public class LoginFrame extends javax.swing.JFrame {
             // Check if username is 'admin' and password is the hashed version of 'admin'
             if ("admin".equals(username) && "21232f297a57a5a743894a0e4a801fc3".equals(hashedPassword)) { // MD5 hash of 'admin'
                 message="Login successful as admin";
-            	JOptionPane.showMessageDialog(this, "Login successful as admin");
+            	//JOptionPane.showMessageDialog(this, "Login successful as admin");
+            	Index index =new Index();
+            	index.setVisible(true);
+            	this.dispose();
             } else {
             	message="Invalid admin username or password";
                 JOptionPane.showMessageDialog(this, "Invalid admin username or password");
@@ -69,8 +72,18 @@ public class LoginFrame extends javax.swing.JFrame {
                 if (user.getUsername().equals(username) && user.getPassword().equals(hashedPassword)) {
                     message="Login successful as " + userType;
                     User loged = new User(username, password, hashedPassword, userType);
-                	Index index =new Index();
-                	index.setVisible(true);
+                    switch (userType) {
+                    case "user":
+                    	UserIndex uindex =new UserIndex();
+                    	uindex.setVisible(true);
+                    case "store owner":
+                    	OwnerIndex oindex =new OwnerIndex();
+                    	oindex.setVisible(true);
+                    case "supplier":
+                    	SupplierIndex sindex =new SupplierIndex();
+                    	sindex.setVisible(true);}
+                    this.dispose();
+                	
                     //JOptionPane.showMessageDialog(this, "Login successful as " + userType);
                     return;
                 }
