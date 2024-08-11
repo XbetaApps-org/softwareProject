@@ -1,0 +1,62 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.software</groupId>
+  <artifactId>software</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.18.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-junit</artifactId>
+    <version>7.18.0</version>
+    <type>jar</type>
+</dependency>
+<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-picocontainer -->
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-picocontainer</artifactId>
+    <version>7.18.0</version>
+</dependency>
+<dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-swing-junit</artifactId>
+        <version>3.17.1</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- AssertJ Core for assertions -->
+    <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>3.17.2</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Unirest HTTP Client -->
+    <dependency>
+        <groupId>com.konghq</groupId>
+        <artifactId>unirest-java</artifactId>
+        <version>3.11.09</version>
+    </dependency>
+
+    <!-- JSON Library -->
+    <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20210307</version>
+    </dependency>
+<dependency>
+    <groupId>com.konghq</groupId>
+    <artifactId>unirest-java</artifactId>
+    <version>3.11.09</version>
+</dependency>
+
+
+    </dependencies>
+</project>
