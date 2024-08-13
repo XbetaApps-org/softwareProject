@@ -25,6 +25,8 @@ public class OperationTest {
 
 	@When("the admin enters product ID {string}, name {string}, price {string}")
 	public void the_admin_enters_product_id_name_price(String productId, String productName, String price) {
+		//a.getOperation().setSelectedIndex(1);
+		//a.getOperation().setSelectedIndex(0);
 		a.getProductIdT().setText(productId);
 		a.getProductNT().setText(productName);
 	    a.getPriceT().setText(price);

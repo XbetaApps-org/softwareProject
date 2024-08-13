@@ -1,7 +1,7 @@
 package com.software.models;
 
 public class Product {
-	private String productId;
+    private String productId;
     private String productName;
     private double price;
 

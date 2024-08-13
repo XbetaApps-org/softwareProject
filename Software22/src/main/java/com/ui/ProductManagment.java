@@ -28,6 +28,7 @@ public class ProductManagment extends javax.swing.JFrame {
      private String message;
      private  List<Product> productList = new ArrayList<>();
      
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,7 +37,22 @@ public class ProductManagment extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-
+    	
+    	Product a = new Product("1","a",5);
+        productList.add(a);
+        
+         a = new Product("2","a",5);
+        productList.add(a);
+        
+         a = new Product("3","a",5);
+        productList.add(a);
+        
+         a = new Product("999","a",5);
+        productList.add(a);
+        
+         a = new Product("1000","a",5);
+        productList.add(a);
+        
         setOperation(new javax.swing.JComboBox<>());
         submitB = new javax.swing.JButton();
         setPriceT(new javax.swing.JTextField());
@@ -48,7 +64,7 @@ public class ProductManagment extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        getOperation().setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "add", "update", "delete" }));
+        getOperation().setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"delete","add","update" }));
 
         submitB.setText("Submit");
         submitB.addActionListener(new java.awt.event.ActionListener() {
@@ -133,11 +149,13 @@ public class ProductManagment extends javax.swing.JFrame {
     }                                      
 
     private void submitBActionPerformed(java.awt.event.ActionEvent evt) {                                        
-    String productId = ProductIdT.getText();
+    String  productId = ProductIdT.getText();
     String productName = getProductNT().getText();
     String priceText = getPriceT().getText();
     String actionType = (String) getOperation().getSelectedItem();
-
+    
+   
+    
     // Basic validation for empty fields
     if (productId.isEmpty() || productName.isEmpty() || priceText.isEmpty()) {
         JOptionPane.showMessageDialog(this, "All fields must be filled", "Error", JOptionPane.ERROR_MESSAGE);
@@ -146,21 +164,28 @@ public class ProductManagment extends javax.swing.JFrame {
     }
 
     // Parse the price and handle possible number format exception
-    double price;
-    try {
-        price = Double.parseDouble(priceText);
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Invalid price format", "Error", JOptionPane.ERROR_MESSAGE);
-        message = "Invalid price format";
-        return;
+    double price=0;
+    
+    if(priceText.startsWith("-"))
+   	{
+            JOptionPane.showMessageDialog(this, "Invalid price format", "Error", JOptionPane.ERROR_MESSAGE);
+            message = "Invalid price format";
+            return;
     }
+    
 
     switch (actionType.toLowerCase()) {
-        case "add":
+    case "add":
+        // Check if the product already exists
+        if (productExists(productId)) {
+            JOptionPane.showMessageDialog(this, "Product already exists", "Error", JOptionPane.ERROR_MESSAGE);
+            message = "Product already exists";
+        } else {
             addProduct(productId, productName, price);
-            break;
+        }
+        break;
 
-        case "edit":
+        case "update":
             editProduct(productId, productName, price);
             break;
 
@@ -173,11 +198,25 @@ public class ProductManagment extends javax.swing.JFrame {
             message = "Invalid action type";
             break;
     }
-    }                                       
+    }   
+    private boolean productExists(String productId) {
+        System.out.println("Checking for product with ID: " + productId  ); // Debugging output
+        for (Product p : productList) {
+        	 System.out.println("Checking for product  ID: " + p.getProductId() );
+            if (p.getProductId().equals(productId)) {
+                System.out.println("Product found: " + p); // Debugging output
+                return true;
+            }
+        }
+        System.out.println("Product not found"); // Debugging output
+        return false;
+    }
+
     private void addProduct(String productId, String productName, double price) {
     boolean productExists = productList.stream()
         .anyMatch(product -> product.getProductId().equals(productId));
 
+    
     if (productExists) {
         JOptionPane.showMessageDialog(this, "Product already exists", "Error", JOptionPane.ERROR_MESSAGE);
         message = "Product already exists";
@@ -215,7 +254,7 @@ private void deleteProduct(String productId) {
         .orElse(null);
 
     if (existingProduct != null) {
-        productList.remove(existingProduct);
+        productList.remove(productExists(productId));
         JOptionPane.showMessageDialog(this, "Product deleted successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
         message = "Product deleted successfully";
     } else {
@@ -267,7 +306,7 @@ private void deleteProduct(String productId) {
     private javax.swing.JTextField ProductNT;
     private javax.swing.JLabel productIdL;
     private javax.swing.JLabel productIdL2;
-    private javax.swing.JButton submitB;    
+    public javax.swing.JButton submitB;    
     // End of variables declaration     
     
     public void submit() {

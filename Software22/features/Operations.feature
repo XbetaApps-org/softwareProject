@@ -1,6 +1,6 @@
 Feature: Product Management
 
-  Scenario Outline: Add a product
+  Scenario: Add a product
   Given the admin is on the product management page
   And the admin selects action type "Add" from the combo box
   When the admin enters product ID "<productId>", name "<productName>", price "<price>"
@@ -12,11 +12,10 @@ Feature: Product Management
   | 1         | Product A   | 10.00 | Product added successfully     |
   | 2         | Product B   | 20.00 | Product added successfully     |
   | 3         | Product C   | 30.00 | Product added successfully     |
-  | 4         | Product A   | 10.00 | Product already exists         |
+  | 1         | Product A   | 10.00 | Product already exists         |
   | 5         | Product X   | -5.00 | Invalid price format           |  
-
   
-  Scenario Outline: Update a product
+  Scenario: Update a product
     Given the admin is on the product management page
     And the admin selects action type "Update" from the combo box
     When the admin enters product ID "<productId>", new name "<newName>", and new price "<newPrice>"
@@ -31,7 +30,7 @@ Feature: Product Management
       | 1         | Updated A | 15.00    | Product with ID 1 already updated |
       | 999       | New Name  | 50.00    | Product with ID 999 does not exist|
   
-  Scenario Outline: Delete a product
+  Scenario: Delete a product
     Given the admin is on the product management page
     And the admin selects action type "Delete" from the combo box
     When the admin enters product ID "<productId>"
