@@ -1,8 +1,8 @@
-package com.stepDefinition;
+package com.software.steps;
 
 import static org.junit.Assert.assertEquals;
 
-import com.ui.ProductManagment;
+import com.software.ui.ProductManagment;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
