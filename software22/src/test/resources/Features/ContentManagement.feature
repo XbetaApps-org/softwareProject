@@ -14,4 +14,3 @@ Feature: Content Management
     Given I have a list with a recipe titled "Chocolate Cake"
     When I delete the recipe with title "Chocolate Cake"
     Then the recipe list should be empty
- 
