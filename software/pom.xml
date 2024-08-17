@@ -3,10 +3,7 @@
   <groupId>com.software</groupId>
   <artifactId>software</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <properties>
-  <sonar.organization>xbetaapps-org</sonar.organization>
-  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-</properties>
+ 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
 <dependency>
@@ -29,4 +26,8 @@
 </dependency>
 
     </dependencies>
+   <properties>
+  <sonar.organization>xbetaapps-org</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
 </project>
