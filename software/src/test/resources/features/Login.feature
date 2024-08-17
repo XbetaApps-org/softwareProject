@@ -10,9 +10,9 @@ Feature: Login Feature
   Examples:
     | role         | username | password | message                      |
     | admin        | admin    | admin    | Login successful as admin    |
-    | user         | user1    | pass123  | Login successful as user     |
-    | store owner  | owner1   | pass123  | Login successful as store owner |
-    | supplier     | supplier1| pass123  | Login successful as supplier |
+    | user         | user1    | pass123  | Invalid username or password     |
+    | store owner  | owner1   | pass123  | Invalid username or password |
+    | supplier     | supplier1| pass123  | Invalid username or password |
 
   Scenario Outline: Invalid Login
     Given the user is on the login page

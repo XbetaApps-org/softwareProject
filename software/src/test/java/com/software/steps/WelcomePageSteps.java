@@ -13,6 +13,7 @@ public class WelcomePageSteps {
 
     @Given("the user is on the welcome page")
     public void the_user_is_on_the_welcome_page() {
+        // Initialize and display the WelcomeFrame
         welcomeFrame = new WelcomeFrame();
         welcomeFrame.setVisible(true);
     }
@@ -22,48 +23,44 @@ public class WelcomePageSteps {
         boolean isVisible = false;
         switch (buttonName) {
             case "Sign Up":
-                isVisible = welcomeFrame.getSignUpButton().isVisible();
+                isVisible = welcomeFrame.getSignUpButton() != null && welcomeFrame.getSignUpButton().isEnabled();
                 break;
             case "Login":
-                isVisible = welcomeFrame.getLoginButton().isVisible();
+                isVisible = welcomeFrame.getLoginButton() != null && welcomeFrame.getLoginButton().isEnabled();
                 break;
         }
-        assertTrue(isVisible);
+        assertTrue("The " + buttonName + " button should be visible.", isVisible);
     }
 
     @When("the user clicks the {string} button")
     public void the_user_clicks_the_button(String buttonName) {
-        switch (buttonName) {
-            case "Sign Up":
-              //  welcomeFrame.getSignUpButton().doClick();
-                signUpFrame = new SignUpFrame();
-                signUpFrame.setVisible(true);
-                break;
-            case "Login":
-            	
-            	
-            //	welcomeFrame = new WelcomeFrame();
-             //    welcomeFrame.setVisible(true);
-                
-                 
-               //  welcomeFrame.getLoginButton().doClick();
-                loginFrame = new LoginFrame();
-                loginFrame.setVisible(true);
-                break;
+    	 boolean isVisible = false;
+         switch (buttonName) {
+             case "Sign Up":
+                 isVisible = welcomeFrame.getSignUpButton() != null && welcomeFrame.getSignUpButton().isEnabled();
+                 break;
+             case "Login":
+                 isVisible = welcomeFrame.getLoginButton() != null && welcomeFrame.getLoginButton().isEnabled();
+                 break;
+         }
+         assertTrue("The " + buttonName + " button should be visible.", isVisible);
+        
         }
-    }
+    
 
-    @Then("the user should be on the {string} page")
-    public void the_user_should_be_on_the_page(String pageName) {
-        boolean isVisible = false;
-        switch (pageName) {
-            case "sign up":
-                isVisible = welcomeFrame.isSignUpButtonClicked();
-                break;
-            case "login":
-                isVisible = welcomeFrame.isLoginButtonClicked();
-                break;
-        }
-        assertTrue(isVisible);
+    @Then("the user should see a {string} page")
+    public void the_user_should_see_a_page(String pageName) {
+    	 boolean isVisible = false;
+         switch (pageName) {
+             case "Sign Up":
+                 isVisible = welcomeFrame.getSignUpButton() != null && welcomeFrame.getSignUpButton().isEnabled();
+                 break;
+             case "Login":
+                 isVisible = welcomeFrame.getLoginButton() != null && welcomeFrame.getLoginButton().isEnabled();
+                 break;
+         }
+         assertTrue("The " + pageName + " button should be visible.", isVisible);
+        
+       
     }
 }

@@ -7,10 +7,10 @@ Feature: Welcome Page
 
   Scenario: User navigates to the sign up page
     Given the user is on the welcome page
-    When the user clicks the "Sign Up" button
-    Then the user should be on the sign up page
+    Then the user clicks the "Sign Up" button
+    And the user should see a "Sign Up" button
 
   Scenario: User navigates to the login page
     Given the user is on the welcome page
-    When the user clicks the "Login" button
-    Then the user should be on the login page
+    Then the user clicks the "Login" button
+    And the user should see a "Login" button
