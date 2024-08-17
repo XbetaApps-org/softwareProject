@@ -62,11 +62,18 @@
                     <target>1.8</target> <!-- Use Java 8 or newer -->
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.0.2155</version>
+            </plugin>
         </plugins>
     </build>
 
     <properties>
         <sonar.organization>xbetaapps-org</sonar.organization>
+        <sonar.projectKey>your-project-key</sonar.projectKey>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.login>${sonar.login}</sonar.login>
     </properties>
 </project>
