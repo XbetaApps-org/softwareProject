@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 
 public class FeedBackManageFrame extends javax.swing.JFrame {
 
+    private static final String FONT_SEGOE_UI = "Segoe UI";
+    
     private javax.swing.JTextArea feedbackArea;
     private javax.swing.JButton backToHomeButton;
     private javax.swing.JLabel titleLabel;
@@ -21,7 +23,6 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
         feedbackPanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         feedbackScrollPane = new javax.swing.JScrollPane();
@@ -34,20 +35,20 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
 
         feedbackPanel.setBackground(new java.awt.Color(38, 25, 38));
 
-        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); 
+        titleLabel.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 24)); 
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("FeedBacks");
 
         feedbackArea.setBackground(new java.awt.Color(0, 0, 0));
         feedbackArea.setColumns(20);
-        feedbackArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
+        feedbackArea.setFont(new java.awt.Font(FONT_SEGOE_UI, 0, 14)); 
         feedbackArea.setForeground(new java.awt.Color(255, 255, 255));
         feedbackArea.setRows(5);
         feedbackScrollPane.setViewportView(feedbackArea);
 
         backToHomeButton.setBackground(new java.awt.Color(153, 0, 0));
-        backToHomeButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); 
+        backToHomeButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 15)); 
         backToHomeButton.setForeground(new java.awt.Color(102, 255, 102));
         backToHomeButton.setText("Back To Home");
         backToHomeButton.addActionListener(evt -> handleBackToHomeButton(evt));
@@ -115,25 +116,19 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
-    }                        
+    }
 
-    private void handleBackToHomeButton(java.awt.event.ActionEvent evt) {                                              
+    private void handleBackToHomeButton(java.awt.event.ActionEvent evt) {
         Index index = new Index();
         index.setVisible(true);
         this.dispose();
-    }                                             
-
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> {
-            new FeedBackManageFrame().setVisible(true);
-        });
     }
 
     private void loadFeedbackFromFile(String fileName) {
@@ -149,5 +144,9 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error loading feedback from file: " + e.getMessage(),
                                           "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> new FeedBackManageFrame().setVisible(true));
     }
 }
