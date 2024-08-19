@@ -4,10 +4,15 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MailSender {
 
-   
+    
+    private static final Logger LOGGER = Logger.getLogger(MailSender.class.getName());
+
+    
     private MailSender() {
         throw new UnsupportedOperationException("Utility class cannot be instantiated");
     }
@@ -31,9 +36,10 @@ public class MailSender {
                     .build();
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
+            LOGGER.log(Level.INFO, "Response: {0}", response.body()); 
+
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "An error occurred while sending the email", e);  
         }
     }
 }
