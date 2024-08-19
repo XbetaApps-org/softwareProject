@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Ensure a complete history is available for SonarCloud analysis
       
@@ -37,12 +38,13 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build and analyze
+      - name: Build and analyze with SonarCloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Token for PR information
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Token for SonarCloud
         run: |
-          mvn -B clean verify -Dmaven.test.failure.ignore=true org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          mvn -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar \
             -Dsonar.projectKey=XbetaApps-org_softwareProject \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dmaven.test.failure.ignore=true
