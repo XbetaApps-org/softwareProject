@@ -2,6 +2,9 @@ package com.software.ui;
 
 public class Index extends javax.swing.JFrame {
 
+    // Define a constant for the "Segoe UI" font
+    private static final String FONT_SEGOE_UI = "Segoe UI";
+    
     private javax.swing.JButton accountsButton;
     private javax.swing.JButton contentManagementButton;
     private javax.swing.JButton feedbackButton;
@@ -19,13 +22,12 @@ public class Index extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
         mainPanel = new javax.swing.JPanel();
         headerPanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         adminLabel = new javax.swing.JLabel();
         buttonPanel = new javax.swing.JPanel();
-        
+
         feedbackButton = new javax.swing.JButton();
         accountsButton = new javax.swing.JButton();
         reportsButton = new javax.swing.JButton();
@@ -41,7 +43,7 @@ public class Index extends javax.swing.JFrame {
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Art Of Baking");
 
-        adminLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); 
+        adminLabel.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 24)); 
         adminLabel.setForeground(new java.awt.Color(255, 255, 255));
         adminLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         adminLabel.setText("ADMIN");
@@ -70,31 +72,31 @@ public class Index extends javax.swing.JFrame {
         buttonPanel.setBackground(new java.awt.Color(38, 25, 38));
 
         feedbackButton.setBackground(new java.awt.Color(153, 0, 0));
-        feedbackButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); 
+        feedbackButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 14)); 
         feedbackButton.setForeground(new java.awt.Color(102, 255, 102));
         feedbackButton.setText("FeedBack");
         feedbackButton.addActionListener(evt -> handleFeedbackButton(evt));
 
         accountsButton.setBackground(new java.awt.Color(153, 0, 0));
-        accountsButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); 
+        accountsButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 14)); 
         accountsButton.setForeground(new java.awt.Color(102, 255, 102));
         accountsButton.setText("Accounts");
         accountsButton.addActionListener(evt -> handleAccountsButton(evt));
 
         reportsButton.setBackground(new java.awt.Color(153, 0, 0));
-        reportsButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); 
+        reportsButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 14)); 
         reportsButton.setForeground(new java.awt.Color(102, 255, 102));
         reportsButton.setText("Reports");
         reportsButton.addActionListener(evt -> handleReportsButton(evt));
 
         statisticsButton.setBackground(new java.awt.Color(153, 0, 0));
-        statisticsButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); 
+        statisticsButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 14)); 
         statisticsButton.setForeground(new java.awt.Color(102, 255, 102));
         statisticsButton.setText("Statistics");
         statisticsButton.addActionListener(evt -> handleStatisticsButton(evt));
 
         contentManagementButton.setBackground(new java.awt.Color(153, 0, 0));
-        contentManagementButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); 
+        contentManagementButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 14)); 
         contentManagementButton.setForeground(new java.awt.Color(102, 255, 102));
         contentManagementButton.setText("Content Management");
         contentManagementButton.addActionListener(evt -> handleContentManagementButton(evt));
