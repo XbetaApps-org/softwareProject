@@ -39,11 +39,10 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build and analyze with Maven
-        run: mvn -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar \
+        run: mvn -B clean verify sonar:sonar \
               -Dsonar.projectKey=XbetaApps-org_softwareProject \
               -Dsonar.host.url=https://sonarcloud.io \
               -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Token for PR information
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Token for SonarCloud
-
