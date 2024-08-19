@@ -64,7 +64,8 @@ public class AccountsManagementSteps {
 
     @And("clicks on the submit button")
     public void clicks_on_the_submit_button() {
-        accountsFrame.SubmitButtonActionPerformed(null);
+        // Updated to the new method name after refactoring
+        accountsFrame.handleSubmitButton();
     }
 
     @Then("the system shows a message {string}")
@@ -72,10 +73,12 @@ public class AccountsManagementSteps {
         message = accountsFrame.getMessage();
         assertEquals(expectedMessage, message);
     }
+    
     @Given("clicks on the Back To Home button")
     public void clicks_on_the_back_to_home_button() {
-    	accountsFrame.SubmitButton1ActionPerformed(null);
-    	message = accountsFrame.getMessage();
-    	assertEquals("Welcome To Home", message);
+        // Updated to the new method name after refactoring
+        accountsFrame.handleBackButton();
+        message = accountsFrame.getMessage();
+        assertEquals("Welcome To Home", message);
     }
-}
+} 
