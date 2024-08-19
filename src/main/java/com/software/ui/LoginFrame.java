@@ -45,54 +45,64 @@ public class LoginFrame extends javax.swing.JFrame {
         }
     }
 
-    public void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        String username = userNameField.getText();
-        String password = new String(PasswordField.getPassword());
-        String hashedPassword = hashPassword(password);
-        String userType = String.valueOf(jComboBox1.getSelectedItem());
+   public void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    String username = userNameField.getText();
+    String password = new String(PasswordField.getPassword());
+    String hashedPassword = hashPassword(password);
+    String userType = String.valueOf(jComboBox1.getSelectedItem());
 
-        if ("admin".equals(userType)) {
-            // Check if username is 'admin' and password is the hashed version of 'admin'
-            if ("admin".equals(username) && "21232f297a57a5a743894a0e4a801fc3".equals(hashedPassword)) { // MD5 hash of 'admin'
-                message="Login successful as admin";
-            	//JOptionPane.showMessageDialog(this, "Login successful as admin");
-            	Index index =new Index();
-            	index.setVisible(true);
-            	this.dispose();
-            } else {
-            	message="Invalid admin username or password";
-                JOptionPane.showMessageDialog(this, "Invalid admin username or password");
-            }
-        } else {
-            // Check for user, store owner, and supplier
-            ArrayList<User> currentList = getUserListByType(userType);
+    if (isAdminLogin(userType, username, hashedPassword)) {
+        performAdminLogin();
+    } else {
+        handleUserLogin(userType, username, hashedPassword);
+    }
+}
 
-            for (User user : currentList) {
-            	
-                if (user.getUsername().equals(username) && user.getPassword().equals(hashedPassword)) {
-                    message="Login successful as " + userType;
-                    User loged = new User(username, password, hashedPassword, userType);
-                    switch (userType) {
-                    case "user":
-                    	UserIndex uindex =new UserIndex();
-                    	uindex.setVisible(true);
-                    case "store owner":
-                    	OwnerIndex oindex =new OwnerIndex();
-                    	oindex.setVisible(true);
-                    case "supplier":
-                    	SupplierIndex sindex =new SupplierIndex();
-                    	sindex.setVisible(true);}
-                    this.dispose();
-                	
-                    //JOptionPane.showMessageDialog(this, "Login successful as " + userType);
-                    return;
-                }
-            }
-            message="Invalid username or password";
-            JOptionPane.showMessageDialog(this, "Invalid username or password");
+private boolean isAdminLogin(String userType, String username, String hashedPassword) {
+    return "admin".equals(userType) 
+           && "admin".equals(username) 
+           && "21232f297a57a5a743894a0e4a801fc3".equals(hashedPassword);
+}
+
+private void performAdminLogin() {
+    message = "Login successful as admin";
+    Index index = new Index();
+    index.setVisible(true);
+    this.dispose();
+}
+
+private void handleUserLogin(String userType, String username, String hashedPassword) {
+    ArrayList<User> currentList = getUserListByType(userType);
+
+    for (User user : currentList) {
+        if (user.getUsername().equals(username) && user.getPassword().equals(hashedPassword)) {
+            message = "Login successful as " + userType;
+            User loged = new User(username, "", hashedPassword, userType);
+            openUserTypeIndex(userType);
+            this.dispose();
+            return;
         }
     }
+    message = "Invalid username or password";
+    JOptionPane.showMessageDialog(this, "Invalid username or password");
+}
 
+private void openUserTypeIndex(String userType) {
+    switch (userType) {
+        case "user":
+            UserIndex uindex = new UserIndex();
+            uindex.setVisible(true);
+            break;
+        case "store owner":
+            OwnerIndex oindex = new OwnerIndex();
+            oindex.setVisible(true);
+            break;
+        case "supplier":
+            SupplierIndex sindex = new SupplierIndex();
+            sindex.setVisible(true);
+            break;
+    }
+}
     private String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
