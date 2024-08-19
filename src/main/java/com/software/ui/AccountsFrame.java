@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import com.software.models.User;
-import java.util.logging.Logger;
 
 public class AccountsFrame extends javax.swing.JFrame {
 
@@ -77,7 +77,7 @@ public class AccountsFrame extends javax.swing.JFrame {
         pack();
     }
 
-    private void handleSubmitButton() {
+    public void handleSubmitButton() {
         String userType = userTypeComboBox.getSelectedItem().toString();
         String actionType = actionTypeComboBox.getSelectedItem().toString();
         String username = userNameField.getText();
@@ -109,8 +109,8 @@ public class AccountsFrame extends javax.swing.JFrame {
                 break;
             case "Edit":
                 if (!userExists(userList, username, email)) {
-                    JOptionPane.showMessageDialog(this, userType + " that you want to edit is not exist");
-                    message = userType + " that you want to edit is not exist";
+                    JOptionPane.showMessageDialog(this, userType + " that you want to edit does not exist");
+                    message = userType + " that you want to edit does not exist";
                 } else {
                     editUser(userList, newUser);
                     saveUserList(userList, getFileName(userType));
@@ -120,8 +120,8 @@ public class AccountsFrame extends javax.swing.JFrame {
                 break;
             case "Delete":
                 if (!userExists(userList, username, email)) {
-                    JOptionPane.showMessageDialog(this, userType + " that you want to delete is not exist");
-                    message = userType + " that you want to delete is not exist";
+                    JOptionPane.showMessageDialog(this, userType + " that you want to delete does not exist");
+                    message = userType + " that you want to delete does not exist";
                 } else {
                     deleteUser(userList, username, email);
                     saveUserList(userList, getFileName(userType));
@@ -136,7 +136,7 @@ public class AccountsFrame extends javax.swing.JFrame {
         }
     }
 
-    private void handleBackButton() {
+    public void handleBackButton() {
         message = "Welcome To Home";
         Index index = new Index();
         index.setVisible(true);
