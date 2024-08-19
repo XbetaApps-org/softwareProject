@@ -69,17 +69,18 @@
             
             <!-- Sonar Maven Plugin -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+                <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.0.2155</version>
+                <version>3.9.1.2184</version>
             </plugin>
         </plugins>
     </build>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.organization>xbetaapps-org</sonar.organization>
         <sonar.projectKey>XbetaApps-org_softwareProject</sonar.projectKey>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <!-- Remove sonar.login from here -->
     </properties>
 </project>
