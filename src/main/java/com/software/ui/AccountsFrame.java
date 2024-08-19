@@ -9,14 +9,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-
 import com.software.models.User;
 
 public class AccountsFrame extends javax.swing.JFrame {
-
     private javax.swing.JTextField CityField;
     private javax.swing.JTextField EmailField;
     private javax.swing.JPasswordField PasswordField;
@@ -32,7 +29,6 @@ public class AccountsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField userNameField;
     private String message;
 
@@ -42,12 +38,11 @@ public class AccountsFrame extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         EmailField = new javax.swing.JTextField();
@@ -98,6 +93,8 @@ public class AccountsFrame extends javax.swing.JFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
+        // Removed jPanel3 as a class-level variable and declared it locally here
+        javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
         jPanel3.setBackground(new java.awt.Color(38, 25, 38));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Store owner", "Supplier" }));
@@ -284,13 +281,13 @@ public class AccountsFrame extends javax.swing.JFrame {
         String email = EmailField.getText();
         String password = new String(PasswordField.getPassword());
         String city = CityField.getText();
-      
+
         if (!isValidEmail(email)) {
             JOptionPane.showMessageDialog(this, "Invalid email format");
             message = "Invalid email format";
             return;
         }
-        
+
         String hashedPassword = hashPassword(password);
         User newUser = new User(username, email, hashedPassword, city);
         ArrayList<User> userList = loadUserList(userType);
@@ -421,7 +418,7 @@ public class AccountsFrame extends javax.swing.JFrame {
     }
 
     public void SubmitButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-    	message="Welcome To Home";
+        message = "Welcome To Home";
         Index index = new Index();
         index.setVisible(true);
         this.dispose();
