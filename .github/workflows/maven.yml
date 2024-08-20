@@ -33,3 +33,5 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B clean install
+        env:
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
