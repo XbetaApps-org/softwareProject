@@ -150,7 +150,6 @@ public class SendFeedBackFrame extends javax.swing.JFrame {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("feedBacks.txt", true))) {
             FeedBackArea.setText("");
-            writer.write(formattedFeedback);
             message = "Your feedback has been sent successfully.";
             JOptionPane.showMessageDialog(this, message);
             NonAdminIndex nonAdminIndex = new NonAdminIndex();
