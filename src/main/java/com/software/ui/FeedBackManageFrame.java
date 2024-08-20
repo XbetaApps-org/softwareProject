@@ -8,6 +8,9 @@ import javax.swing.JOptionPane;
 public class FeedBackManageFrame extends javax.swing.JFrame {
 
     private static final String FONT_SEGOE_UI = "Segoe UI";
+    private static final String ERROR_TITLE = "Error";
+    private static final String FEEDBACK_FILE = "feedBacks.txt";
+    
     private javax.swing.JTextArea feedbackArea;
 
     public FeedBackManageFrame() {
@@ -44,7 +47,7 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
         backToHomeButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 15));
         backToHomeButton.setForeground(new java.awt.Color(102, 255, 102));
         backToHomeButton.setText("Back To Home");
-        backToHomeButton.addActionListener(this::handleBackToHomeButton); // Replaced lambda with method reference
+        backToHomeButton.addActionListener(this::handleBackToHomeButton);
 
         javax.swing.GroupLayout feedbackPanelLayout = new javax.swing.GroupLayout(feedbackPanel);
         feedbackPanel.setLayout(feedbackPanelLayout);
@@ -98,7 +101,7 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
                     .addGap(15, 15, 15))
         );
 
-        loadFeedbackFromFile("feedBacks.txt");
+        loadFeedbackFromFile(FEEDBACK_FILE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,13 +127,6 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
         this.dispose();
     }
 
-    // Removed the unused parameter "evt"
-    private void handleBackToHomeButton() {
-        Index index = new Index();
-        index.setVisible(true);
-        this.dispose();
-    }
-
     private void loadFeedbackFromFile(String fileName) {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             StringBuilder feedbackContent = new StringBuilder();
@@ -140,9 +136,8 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
             }
             feedbackArea.setText(feedbackContent.toString());
         } catch (IOException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error loading feedback from file: " + e.getMessage(),
-                                          "Error", JOptionPane.ERROR_MESSAGE);
+                                          ERROR_TITLE, JOptionPane.ERROR_MESSAGE);
         }
     }
 
