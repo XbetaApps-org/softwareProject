@@ -33,8 +33,7 @@ public class AccountsFrame extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        javax.swing.JPanel headerPanel = new javax.swing.JPanel();
-
+        // Removed the unused headerPanel declaration
         javax.swing.JLabel titleLabel = new javax.swing.JLabel();
         titleLabel.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 24));
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -44,17 +43,20 @@ public class AccountsFrame extends javax.swing.JFrame {
         userTypeComboBox = new javax.swing.JComboBox<>();
         actionTypeComboBox = new javax.swing.JComboBox<>();
         emailField = new javax.swing.JTextField();
+
         javax.swing.JLabel emailLabel = new javax.swing.JLabel();
         emailLabel.setFont(new java.awt.Font(FONT_ARABIC_FIXED, 1, 14));
         emailLabel.setText("Email");
 
         userNameField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
+
         javax.swing.JLabel passwordLabel = new javax.swing.JLabel();
         passwordLabel.setFont(new java.awt.Font(FONT_ARABIC_FIXED, 1, 14));
         passwordLabel.setText("Password");
 
         cityField = new javax.swing.JTextField();
+
         javax.swing.JLabel cityLabel = new javax.swing.JLabel();
         cityLabel.setFont(new java.awt.Font(FONT_ARABIC_FIXED, 1, 14));
         cityLabel.setText("City");
@@ -95,37 +97,40 @@ public class AccountsFrame extends javax.swing.JFrame {
         switch (actionType) {
             case "Add":
                 if (userExists(userList, username, email)) {
-                    JOptionPane.showMessageDialog(this, userType + " already exists");
-                    message = userType + " already exists";
+                    JOptionPane.showMessageDialog(this, String.format("%s already exists", userType));
+                    message = String.format("%s already exists", userType);
                 } else {
                     userList.add(newUser);
                     saveUserList(userList, getFileName(userType));
-                    JOptionPane.showMessageDialog(this, userType + " added successfully");
-                    message = userType + " added successfully";
+                    JOptionPane.showMessageDialog(this, String.format("%s added successfully", userType));
+                    message = String.format("%s added successfully", userType);
                 }
                 break;
+
             case "Edit":
                 if (!userExists(userList, username, email)) {
-                    JOptionPane.showMessageDialog(this, userType + " that you want to edit does not exist");
-                    message = userType + " that you want to edit does not exist";
+                    JOptionPane.showMessageDialog(this, String.format("%s that you want to edit does not exist", userType));
+                    message = String.format("%s that you want to edit does not exist", userType);
                 } else {
                     editUser(userList, newUser);
                     saveUserList(userList, getFileName(userType));
-                    JOptionPane.showMessageDialog(this, userType + " edited successfully");
-                    message = userType + " edited successfully";
+                    JOptionPane.showMessageDialog(this, String.format("%s edited successfully", userType));
+                    message = String.format("%s edited successfully", userType);
                 }
                 break;
+
             case "Delete":
                 if (!userExists(userList, username, email)) {
-                    JOptionPane.showMessageDialog(this, userType + " that you want to delete does not exist");
-                    message = userType + " that you want to delete does not exist";
+                    JOptionPane.showMessageDialog(this, String.format("%s that you want to delete does not exist", userType));
+                    message = String.format("%s that you want to delete does not exist", userType);
                 } else {
                     deleteUser(userList, username, email);
                     saveUserList(userList, getFileName(userType));
-                    JOptionPane.showMessageDialog(this, userType + " deleted successfully");
-                    message = userType + " deleted successfully";
+                    JOptionPane.showMessageDialog(this, String.format("%s deleted successfully", userType));
+                    message = String.format("%s deleted successfully", userType);
                 }
                 break;
+
             default:
                 JOptionPane.showMessageDialog(this, "Invalid action");
                 message = "Invalid action";
@@ -180,7 +185,7 @@ public class AccountsFrame extends javax.swing.JFrame {
     private void saveUserList(ArrayList<User> userList, String fileName) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             for (User user : userList) {
-                bw.write(user.getUsername() + " " + user.getEmail() + " " + user.getPassword() + " " + user.getCity());
+                bw.write(String.format("%s %s %s %s", user.getUsername(), user.getEmail(), user.getPassword(), user.getCity()));
                 bw.newLine();
             }
         } catch (IOException e) {
