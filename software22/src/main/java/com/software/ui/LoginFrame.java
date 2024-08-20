@@ -4,16 +4,18 @@
  */
 package com.software.ui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Omar Khatib
  */
-public class MainFrame extends javax.swing.JFrame {
+public class LoginFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public LoginFrame() {
         initComponents();
     }
 
@@ -37,7 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
         loginBtn = new javax.swing.JButton();
         doesnt = new javax.swing.JLabel();
         signUpBtn = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        PasswordField = new javax.swing.JPasswordField();
         SignupPanel = new javax.swing.JPanel();
         SweetLabel2 = new javax.swing.JLabel();
         ManagementLabel2 = new javax.swing.JLabel();
@@ -54,9 +56,13 @@ public class MainFrame extends javax.swing.JFrame {
         SignUpBtnS = new javax.swing.JButton();
         Already = new javax.swing.JLabel();
         LoginBtnS = new javax.swing.JButton();
+        UserCheckBox = new javax.swing.JCheckBox();
+        OwnerCheckBox = new javax.swing.JCheckBox();
+        SupplierCheckBox = new javax.swing.JCheckBox();
         BackgroundImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MainTabbedPane.setBackground(new java.awt.Color(255, 255, 255,0));
@@ -68,12 +74,12 @@ public class MainFrame extends javax.swing.JFrame {
         SweetLabel.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 36)); // NOI18N
         SweetLabel.setForeground(new java.awt.Color(93, 56, 10));
         SweetLabel.setText("Sweet ");
-        LoginPanel.add(SweetLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 19, -1, -1));
+        LoginPanel.add(SweetLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
 
         ManagementLabel.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 24)); // NOI18N
         ManagementLabel.setForeground(new java.awt.Color(0, 0, 0));
         ManagementLabel.setText("Management System");
-        LoginPanel.add(ManagementLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 324, 30));
+        LoginPanel.add(ManagementLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 324, 30));
 
         UsernameTextField.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         UsernameTextField.setForeground(new java.awt.Color(0, 0, 0));
@@ -88,19 +94,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         UsernameLabel.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         UsernameLabel.setForeground(new java.awt.Color(0, 0, 0));
-        UsernameLabel.setIcon(new javax.swing.ImageIcon("src/main/resources/Images/user.png")); // NOI18N
+        UsernameLabel.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\user.png")); // NOI18N
         UsernameLabel.setText("Username");
         UsernameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         LoginPanel.add(UsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 120, 30));
 
         PasswordLabel.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         PasswordLabel.setForeground(new java.awt.Color(0, 0, 0));
-        PasswordLabel.setIcon(new javax.swing.ImageIcon("src/main/resources/Images/padlock.png")); // NOI18N
+        PasswordLabel.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\padlock.png")); // NOI18N
         PasswordLabel.setText("Password");
         PasswordLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         LoginPanel.add(PasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 120, 30));
 
-        CakeImage.setIcon(new javax.swing.ImageIcon("src/main/resources/Images/cake (1).png")); // NOI18N
+        CakeImage.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\cake (1).png")); // NOI18N
         LoginPanel.add(CakeImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, -1, -1));
 
         loginBtn.setBackground(new java.awt.Color(93, 56, 10));
@@ -130,10 +136,10 @@ public class MainFrame extends javax.swing.JFrame {
         });
         LoginPanel.add(signUpBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, -1, -1));
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        LoginPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 200, 35));
+        PasswordField.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        PasswordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        PasswordField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        LoginPanel.add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 200, 35));
 
         MainTabbedPane.addTab("tab2", LoginPanel);
 
@@ -152,7 +158,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         UsernameLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         UsernameLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        UsernameLabel2.setIcon(new javax.swing.ImageIcon("src/main/resources/Images/user.png")); // NOI18N
+        UsernameLabel2.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\user.png")); // NOI18N
         UsernameLabel2.setText("Username");
         UsernameLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         SignupPanel.add(UsernameLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 120, 30));
@@ -170,7 +176,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         PasswordLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         PasswordLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        PasswordLabel2.setIcon(new javax.swing.ImageIcon("src/main/resources/Images/padlock.png")); // NOI18N
+        PasswordLabel2.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\padlock.png")); // NOI18N
         PasswordLabel2.setText("Password");
         PasswordLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         SignupPanel.add(PasswordLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 120, 30));
@@ -224,14 +230,14 @@ public class MainFrame extends javax.swing.JFrame {
         CityLabel.setForeground(new java.awt.Color(0, 0, 0));
         CityLabel.setText("City");
         CityLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        SignupPanel.add(CityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 50, 30));
+        SignupPanel.add(CityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 50, 40));
 
         CityComboBox.setBackground(new java.awt.Color(255, 255, 255));
         CityComboBox.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CityComboBox.setForeground(new java.awt.Color(0, 0, 0));
         CityComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Select", "Jerusalem", " Bethlehem", " Beit Jala", " Beit Sahour", " Hebron", " Sabastia", " Jericho", " Ramallah & El-Bireh", " Nablus", " Tulkarem", " Jenin", " Gaza" }));
         CityComboBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        SignupPanel.add(CityComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 130, 40));
+        SignupPanel.add(CityComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 130, 40));
 
         SignUpBtnS.setBackground(new java.awt.Color(93, 56, 10));
         SignUpBtnS.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -242,12 +248,12 @@ public class MainFrame extends javax.swing.JFrame {
                 SignUpBtnSActionPerformed(evt);
             }
         });
-        SignupPanel.add(SignUpBtnS, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 180, -1));
+        SignupPanel.add(SignUpBtnS, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 180, -1));
 
         Already.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Already.setForeground(new java.awt.Color(255, 255, 255));
         Already.setText("Already have an account?");
-        SignupPanel.add(Already, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, -1));
+        SignupPanel.add(Already, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, -1));
 
         LoginBtnS.setBackground(new java.awt.Color(93, 56, 10));
         LoginBtnS.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -258,14 +264,44 @@ public class MainFrame extends javax.swing.JFrame {
                 LoginBtnSActionPerformed(evt);
             }
         });
-        SignupPanel.add(LoginBtnS, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, -1, -1));
+        SignupPanel.add(LoginBtnS, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 437, -1, -1));
+
+        UserCheckBox.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        UserCheckBox.setForeground(new java.awt.Color(0, 0, 0));
+        UserCheckBox.setText("User");
+        UserCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserCheckBoxActionPerformed(evt);
+            }
+        });
+        SignupPanel.add(UserCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, -1, -1));
+
+        OwnerCheckBox.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        OwnerCheckBox.setForeground(new java.awt.Color(0, 0, 0));
+        OwnerCheckBox.setText("Owner");
+        OwnerCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OwnerCheckBoxActionPerformed(evt);
+            }
+        });
+        SignupPanel.add(OwnerCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, -1, -1));
+
+        SupplierCheckBox.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SupplierCheckBox.setForeground(new java.awt.Color(0, 0, 0));
+        SupplierCheckBox.setText("Supplier");
+        SupplierCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SupplierCheckBoxActionPerformed(evt);
+            }
+        });
+        SignupPanel.add(SupplierCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, -1));
 
         MainTabbedPane.addTab("tab2", SignupPanel);
 
         getContentPane().add(MainTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, -40, 370, 520));
 
-        BackgroundImage.setIcon(new javax.swing.ImageIcon("src/main/resources/Images/wallpaperflare.com_wallpaper (1).jpg")); // NOI18N
-        getContentPane().add(BackgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, 480));
+        BackgroundImage.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\Background1.jpg")); // NOI18N
+        getContentPane().add(BackgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 480));
 
         pack();
         setLocationRelativeTo(null);
@@ -276,8 +312,33 @@ public class MainFrame extends javax.swing.JFrame {
     }                                                 
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        
-
+       
+        if(UsernameTextField.getText().equals("") || PasswordField.getPassword().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a valid Username and Password!", null, JOptionPane.ERROR_MESSAGE);
+        }
+        else if(UsernameTextField.getText().equals("Admin") && PasswordField.getText().equals("123"))
+        {
+           this.dispose();
+           new AdminFrame().setVisible(true);
+        } 
+        else if(UsernameTextField.getText().equals("Supplier") && PasswordField.getText().equals("123"))
+        {
+           this.dispose();
+           new RawMaterialSupplierFrame().setVisible(true);
+        } 
+        else if(UsernameTextField.getText().equals("Owner") && PasswordField.getText().equals("123"))
+        {
+           this.dispose();
+           new StoreOwnerFrame().setVisible(true);
+        } 
+        else if(UsernameTextField.getText().equals("User") && PasswordField.getText().equals("123"))
+        {
+           this.dispose();
+           new UserFrame().setVisible(true);
+        } 
+        else 
+            JOptionPane.showMessageDialog(null, "Please enter a valid Username and Password!", null, JOptionPane.ERROR_MESSAGE);
     }                                        
 
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -309,6 +370,24 @@ public class MainFrame extends javax.swing.JFrame {
         MainTabbedPane.setSelectedIndex(0);
     }                                         
 
+    private void UserCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        SupplierCheckBox.setSelected(false);
+        OwnerCheckBox.setSelected(false);
+
+        
+        
+    }                                            
+
+    private void SupplierCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        UserCheckBox.setSelected(false);
+        OwnerCheckBox.setSelected(false);
+    }                                                
+
+    private void OwnerCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        SupplierCheckBox.setSelected(false);
+        UserCheckBox.setSelected(false);
+    }                                             
+
     /**
      * @param args the command line arguments
      */
@@ -326,20 +405,21 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new LoginFrame().setVisible(true);
             }
         });
     }
@@ -359,19 +439,22 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane MainTabbedPane;
     private javax.swing.JLabel ManagementLabel;
     private javax.swing.JLabel ManagementLabel2;
+    private javax.swing.JCheckBox OwnerCheckBox;
+    private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel PasswordLabel;
     private javax.swing.JLabel PasswordLabel2;
     private javax.swing.JTextField PasswordTextField2;
     private javax.swing.JButton SignUpBtnS;
     private javax.swing.JPanel SignupPanel;
+    private javax.swing.JCheckBox SupplierCheckBox;
     private javax.swing.JLabel SweetLabel;
     private javax.swing.JLabel SweetLabel2;
+    private javax.swing.JCheckBox UserCheckBox;
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JLabel UsernameLabel2;
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JTextField UsernameTextField2;
     private javax.swing.JLabel doesnt;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton loginBtn;
     private javax.swing.JButton signUpBtn;
     // End of variables declaration                   
