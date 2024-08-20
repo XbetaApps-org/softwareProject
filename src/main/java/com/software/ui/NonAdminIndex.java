@@ -20,7 +20,7 @@ public class NonAdminIndex extends JFrame {
                 NonAdminIndex frame = new NonAdminIndex();
                 frame.setVisible(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                e.printStackTrace(); // Make sure this debug feature is deactivated before delivering the code in production.
             }
         });
     }
