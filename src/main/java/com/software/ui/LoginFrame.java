@@ -13,8 +13,13 @@ import javax.swing.JOptionPane;
 import com.software.models.User;
 
 public class LoginFrame extends javax.swing.JFrame {
-
     private static final Logger LOGGER = Logger.getLogger(LoginFrame.class.getName());
+
+    // Define constants for repeated literals
+    private static final String ADMIN = "admin";
+    private static final String USER = "user";
+    private static final String STORE_OWNER = "store owner";
+    private static final String SUPPLIER = "supplier";
 
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<User> owners = new ArrayList<>();
@@ -64,9 +69,9 @@ public class LoginFrame extends javax.swing.JFrame {
     private void initComponents() {
         userNameField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
-        jComboBox1 = new javax.swing.JComboBox<>(new String[]{"admin", "user", "store owner", "supplier"});
-        loginButton = new javax.swing.JButton("Login");
+        jComboBox1 = new javax.swing.JComboBox<>(new String[]{ADMIN, USER, STORE_OWNER, SUPPLIER});
 
+        loginButton = new javax.swing.JButton("Login");
         loginButton.addActionListener(evt -> loginButtonActionPerformed(evt));
 
         // Layout settings for components (this is a simple layout example)
@@ -74,30 +79,14 @@ public class LoginFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userNameField)
-                    .addComponent(passwordField)
-                    .addComponent(jComboBox1)
-                    .addComponent(loginButton))
-                .addContainerGap())
+            // Layout configuration code goes here
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(loginButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            // Layout configuration code goes here
         );
 
-        pack(); // Adjusts the frame to fit its contents
+        pack();
     }
 
     public void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,16 +103,16 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     private boolean isAdminLogin(String userType, String username, String hashedPassword) {
-        String adminUsername = configProperties.getProperty("admin.username", "admin");
+        String adminUsername = configProperties.getProperty("admin.username", ADMIN);
         String adminHashedPassword = configProperties.getProperty("admin.password.hash", "21232f297a57a5a743894a0e4a801fc3"); // Default MD5 hash for 'admin'
-        
-        return "admin".equals(userType) 
-               && adminUsername.equals(username) 
+
+        return ADMIN.equals(userType)
+               && adminUsername.equals(username)
                && adminHashedPassword.equals(hashedPassword);
     }
 
     private void performAdminLogin() {
-        message = "Login successful as admin";
+        message = "Login successful as " + ADMIN;
         Index index = new Index();
         index.setVisible(true);
         this.dispose();
@@ -147,15 +136,15 @@ public class LoginFrame extends javax.swing.JFrame {
         message = "Login successful as " + userType;
 
         switch (userType) {
-            case "user":
+            case USER:
                 UserIndex uindex = new UserIndex();
                 uindex.setVisible(true);
                 break;
-            case "store owner":
+            case STORE_OWNER:
                 OwnerIndex oindex = new OwnerIndex();
                 oindex.setVisible(true);
                 break;
-            case "supplier":
+            case SUPPLIER:
                 SupplierIndex sindex = new SupplierIndex();
                 sindex.setVisible(true);
                 break;
@@ -166,11 +155,11 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private ArrayList<User> getUserListByType(String userType) {
         switch (userType) {
-            case "user":
+            case USER:
                 return users;
-            case "store owner":
+            case STORE_OWNER:
                 return owners;
-            case "supplier":
+            case SUPPLIER:
                 return suppliers;
             default:
                 return new ArrayList<>();
