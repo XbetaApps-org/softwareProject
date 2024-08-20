@@ -17,7 +17,12 @@ public class MailSender {
 
     public static void sendEmail(String senderName, String senderEmail, String recipientName, String recipientEmail, String subject, String body) {
         try {
-            String apiKey = "2b14f75b29mshb1f72f0726dd5cep15447ejsn6ce89eab052b";
+            
+            String apiKey = System.getenv("RAPIDAPI_KEY");
+            if (apiKey == null || apiKey.isEmpty()) {
+                throw new IllegalStateException("API key is not set");
+            }
+
             String apiHost = "mail-sender-api1.p.rapidapi.com";
             String isHtml = "false";
             String requestBody = String.format(
@@ -34,7 +39,9 @@ public class MailSender {
                     .build();
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
             LOGGER.log(Level.INFO, "Response: {0}", response.body());
+
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); 
             LOGGER.log(Level.SEVERE, "Thread was interrupted during email sending", e);
