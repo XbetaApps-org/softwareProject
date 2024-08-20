@@ -3,6 +3,7 @@ package com.software.ui;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -10,10 +11,11 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-
 import com.software.models.User;
 
-public class LoginFrame extends JFrame {
+public class LoginFrame extends JFrame implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = Logger.getLogger(LoginFrame.class.getName());
 
     // Define constants for repeated literals
@@ -22,9 +24,10 @@ public class LoginFrame extends JFrame {
     private static final String STORE_OWNER = "store owner";
     private static final String SUPPLIER = "supplier";
 
-    private ArrayList<User> users = new ArrayList<>();
-    private ArrayList<User> owners = new ArrayList<>();
-    private ArrayList<User> suppliers = new ArrayList<>();
+    // Making these collections transient since they may not need to be serialized
+    private transient ArrayList<User> users = new ArrayList<>();
+    private transient ArrayList<User> owners = new ArrayList<>();
+    private transient ArrayList<User> suppliers = new ArrayList<>();
     private Properties configProperties;
 
     // GUI components
@@ -32,7 +35,6 @@ public class LoginFrame extends JFrame {
     private JPasswordField passwordField;
     private JComboBox<String> userTypeComboBox;
     private JButton loginButton;
-
     private String message; // For storing login status messages
 
     public LoginFrame() {
@@ -71,7 +73,6 @@ public class LoginFrame extends JFrame {
         userNameField = new JTextField(20);
         passwordField = new JPasswordField(20);
         userTypeComboBox = new JComboBox<>(new String[]{ADMIN, USER, STORE_OWNER, SUPPLIER});
-
         loginButton = new JButton("Login");
         loginButton.addActionListener(e -> loginButtonActionPerformed());
 
@@ -92,7 +93,7 @@ public class LoginFrame extends JFrame {
         this.add(panel);
         this.pack();
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // Use static access for EXIT_ON_CLOSE
     }
 
     private void loginButtonActionPerformed() {
@@ -160,6 +161,7 @@ public class LoginFrame extends JFrame {
                 LOGGER.warning("Unknown user type: " + userType);
                 break;
         }
+
         this.dispose();
     }
 
