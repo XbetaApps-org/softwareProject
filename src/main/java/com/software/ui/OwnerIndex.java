@@ -20,7 +20,7 @@ public class OwnerIndex extends JFrame {
                 OwnerIndex frame = new OwnerIndex();
                 frame.setVisible(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                e.printStackTrace(); // Make sure this debug feature is deactivated before delivering the code in production.
             }
         });
     }
