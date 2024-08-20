@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class SendFeedBackFrame extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
-    private String message;  // Class-level variable for storing messages
+    private String message;
 
     /**
      * Creates new form SendFeedBackFrame
@@ -22,11 +22,11 @@ public class SendFeedBackFrame extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        sendButton = new javax.swing.JButton();
+        sendButton = new javax.swing.JButton();  // Changed from private to public
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        FeedBackArea = new javax.swing.JTextArea();
-        backButton = new javax.swing.JButton();
+        FeedBackArea = new javax.swing.JTextArea();  // Changed from private to public
+        backButton = new javax.swing.JButton();  // Changed from private to public
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -172,9 +172,9 @@ public class SendFeedBackFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify
-    private javax.swing.JTextArea FeedBackArea;
-    private javax.swing.JButton backButton;
-    private javax.swing.JButton sendButton;
+    public javax.swing.JTextArea FeedBackArea;  // Changed from private to public
+    public javax.swing.JButton backButton;  // Changed from private to public
+    public javax.swing.JButton sendButton;  // Changed from private to public
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
