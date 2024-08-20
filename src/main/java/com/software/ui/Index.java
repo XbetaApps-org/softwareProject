@@ -3,12 +3,6 @@ package com.software.ui;
 public class Index extends javax.swing.JFrame {
     // Define a constant for the "Segoe UI" font
     private static final String FONT_SEGOE_UI = "Segoe UI";
-    
-    private javax.swing.JLabel adminLabel;
-    private javax.swing.JLabel titleLabel;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JPanel headerPanel;
-    private javax.swing.JPanel buttonPanel;
 
     public Index() {
         initComponents();
@@ -16,15 +10,17 @@ public class Index extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        mainPanel = new javax.swing.JPanel();
-        headerPanel = new javax.swing.JPanel();
-        titleLabel = new javax.swing.JLabel();
-        adminLabel = new javax.swing.JLabel();
-        buttonPanel = new javax.swing.JPanel();
+        // Convert the fields to local variables
+        javax.swing.JPanel mainPanel = new javax.swing.JPanel();
+        javax.swing.JPanel headerPanel = new javax.swing.JPanel();
+        javax.swing.JLabel titleLabel = new javax.swing.JLabel();
+        javax.swing.JLabel adminLabel = new javax.swing.JLabel();
+        javax.swing.JPanel buttonPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         headerPanel.setBackground(new java.awt.Color(168, 215, 153));
+
         titleLabel.setFont(new java.awt.Font("Segoe Script", 1, 24)); 
         titleLabel.setForeground(new java.awt.Color(26, 54, 50));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -63,35 +59,35 @@ public class Index extends javax.swing.JFrame {
         feedbackButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 14)); 
         feedbackButton.setForeground(new java.awt.Color(102, 255, 102));
         feedbackButton.setText("FeedBack");
-        feedbackButton.addActionListener(evt -> handleFeedbackButton(evt));
+        feedbackButton.addActionListener(this::handleFeedbackButton);
 
         javax.swing.JButton accountsButton = new javax.swing.JButton();
         accountsButton.setBackground(new java.awt.Color(153, 0, 0));
         accountsButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 14)); 
         accountsButton.setForeground(new java.awt.Color(102, 255, 102));
         accountsButton.setText("Accounts");
-        accountsButton.addActionListener(evt -> handleAccountsButton(evt));
+        accountsButton.addActionListener(this::handleAccountsButton);
 
         javax.swing.JButton reportsButton = new javax.swing.JButton();
         reportsButton.setBackground(new java.awt.Color(153, 0, 0));
         reportsButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 14)); 
         reportsButton.setForeground(new java.awt.Color(102, 255, 102));
         reportsButton.setText("Reports");
-        reportsButton.addActionListener(evt -> handleReportsButton(evt));
+        reportsButton.addActionListener(this::handleReportsButton);
 
         javax.swing.JButton statisticsButton = new javax.swing.JButton();
         statisticsButton.setBackground(new java.awt.Color(153, 0, 0));
         statisticsButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 14)); 
         statisticsButton.setForeground(new java.awt.Color(102, 255, 102));
         statisticsButton.setText("Statistics");
-        statisticsButton.addActionListener(evt -> handleStatisticsButton(evt));
+        statisticsButton.addActionListener(this::handleStatisticsButton);
 
         javax.swing.JButton contentManagementButton = new javax.swing.JButton();
         contentManagementButton.setBackground(new java.awt.Color(153, 0, 0));
         contentManagementButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 14)); 
         contentManagementButton.setForeground(new java.awt.Color(102, 255, 102));
         contentManagementButton.setText("Content Management");
-        contentManagementButton.addActionListener(evt -> handleContentManagementButton(evt));
+        contentManagementButton.addActionListener(this::handleContentManagementButton);
 
         javax.swing.GroupLayout buttonPanelLayout = new javax.swing.GroupLayout(buttonPanel);
         buttonPanel.setLayout(buttonPanelLayout);
@@ -157,7 +153,7 @@ public class Index extends javax.swing.JFrame {
         );
 
         pack();
-    }                        
+    }
 
     private void handleFeedbackButton(java.awt.event.ActionEvent evt) {                                               
         this.setVisible(false);
