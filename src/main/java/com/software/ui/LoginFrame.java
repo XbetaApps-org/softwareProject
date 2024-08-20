@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+
 import com.software.models.User;
 
-public class LoginFrame extends javax.swing.JFrame {
+public class LoginFrame extends JFrame {
     private static final Logger LOGGER = Logger.getLogger(LoginFrame.class.getName());
 
     // Define constants for repeated literals
@@ -27,9 +28,10 @@ public class LoginFrame extends javax.swing.JFrame {
     private Properties configProperties;
 
     // GUI components
-    private javax.swing.JTextField userNameField;
-    private javax.swing.JPasswordField passwordField;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private JTextField userNameField;
+    private JPasswordField passwordField;
+    private JComboBox<String> userTypeComboBox;
+    private JButton loginButton;
 
     private String message; // For storing login status messages
 
@@ -65,35 +67,39 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     // This method initializes the GUI components
-    @SuppressWarnings("unchecked")
     private void initComponents() {
-        userNameField = new javax.swing.JTextField();
-        passwordField = new javax.swing.JPasswordField();
-        jComboBox1 = new javax.swing.JComboBox<>(new String[]{ADMIN, USER, STORE_OWNER, SUPPLIER});
+        userNameField = new JTextField(20);
+        passwordField = new JPasswordField(20);
+        userTypeComboBox = new JComboBox<>(new String[]{ADMIN, USER, STORE_OWNER, SUPPLIER});
 
-        javax.swing.JButton loginButton = new javax.swing.JButton("Login");
-        loginButton.addActionListener(this::loginButtonActionPerformed);
+        loginButton = new JButton("Login");
+        loginButton.addActionListener(e -> loginButtonActionPerformed());
 
-        // Layout settings for components (this is a simple layout example)
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            // Layout configuration code goes here
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            // Layout configuration code goes here
-        );
+        JLabel userLabel = new JLabel("Username:");
+        JLabel passLabel = new JLabel("Password:");
+        JLabel typeLabel = new JLabel("User Type:");
 
-        pack();
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(userLabel);
+        panel.add(userNameField);
+        panel.add(passLabel);
+        panel.add(passwordField);
+        panel.add(typeLabel);
+        panel.add(userTypeComboBox);
+        panel.add(loginButton);
+
+        this.add(panel);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void loginButtonActionPerformed() {
         String username = userNameField.getText();
         String password = new String(passwordField.getPassword());
         String hashedPassword = hashPassword(password);
-        String userType = String.valueOf(jComboBox1.getSelectedItem());
+        String userType = (String) userTypeComboBox.getSelectedItem();
 
         if (isAdminLogin(userType, username, hashedPassword)) {
             performAdminLogin();
@@ -106,13 +112,14 @@ public class LoginFrame extends javax.swing.JFrame {
         String adminUsername = configProperties.getProperty("admin.username", ADMIN);
         String adminHashedPassword = configProperties.getProperty("admin.password.hash", "21232f297a57a5a743894a0e4a801fc3"); // Default MD5 hash for 'admin'
 
-        return ADMIN.equals(userType)
-               && adminUsername.equals(username)
-               && adminHashedPassword.equals(hashedPassword);
+        return ADMIN.equalsIgnoreCase(userType)
+                && adminUsername.equals(username)
+                && adminHashedPassword.equals(hashedPassword);
     }
 
     private void performAdminLogin() {
         message = "Login successful as " + ADMIN;
+        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
         Index index = new Index();
         index.setVisible(true);
         this.dispose();
@@ -123,41 +130,41 @@ public class LoginFrame extends javax.swing.JFrame {
 
         for (User user : currentList) {
             if (user.getUsername().equals(username) && user.getPassword().equals(hashedPassword)) {
-                performUserLogin(userType, user);
+                performUserLogin(userType);
                 return;
             }
         }
 
         message = "Invalid username or password";
-        JOptionPane.showMessageDialog(this, message);
+        JOptionPane.showMessageDialog(this, message, "Login Failed", JOptionPane.ERROR_MESSAGE);
     }
 
-    private void performUserLogin(String userType, User user) {
+    private void performUserLogin(String userType) {
         message = "Login successful as " + userType;
+        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
 
-        switch (userType) {
+        switch (userType.toLowerCase()) {
             case USER:
-                UserIndex uindex = new UserIndex();
-                uindex.setVisible(true);
+                UserIndex userIndex = new UserIndex();
+                userIndex.setVisible(true);
                 break;
             case STORE_OWNER:
-                OwnerIndex oindex = new OwnerIndex();
-                oindex.setVisible(true);
+                OwnerIndex ownerIndex = new OwnerIndex();
+                ownerIndex.setVisible(true);
                 break;
             case SUPPLIER:
-                SupplierIndex sindex = new SupplierIndex();
-                sindex.setVisible(true);
+                SupplierIndex supplierIndex = new SupplierIndex();
+                supplierIndex.setVisible(true);
                 break;
             default:
                 LOGGER.warning("Unknown user type: " + userType);
                 break;
         }
-
         this.dispose();
     }
 
     private ArrayList<User> getUserListByType(String userType) {
-        switch (userType) {
+        switch (userType.toLowerCase()) {
             case USER:
                 return users;
             case STORE_OWNER:
@@ -180,12 +187,12 @@ public class LoginFrame extends javax.swing.JFrame {
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.log(Level.SEVERE, "Hashing algorithm not found", e);
+            LOGGER.log(Level.SEVERE, "MD5 algorithm not found", e);
             return null;
         }
     }
 
-    // Public setter methods for test access
+    // Public getter methods for test access
     public void setUserNameField(String username) {
         this.userNameField.setText(username);
     }
@@ -195,15 +202,18 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     public void setUserType(String userType) {
-        this.jComboBox1.setSelectedItem(userType);
+        this.userTypeComboBox.setSelectedItem(userType);
     }
 
-    // Public getter for the message (used in tests)
     public String getDisplayedMessage() {
         return message;
     }
 
+    public JButton getLoginButton() {
+        return loginButton;
+    }
+
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> new LoginFrame().setVisible(true));
+        SwingUtilities.invokeLater(() -> new LoginFrame().setVisible(true));
     }
 }
