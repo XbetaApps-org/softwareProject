@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import com.software.models.User;
 
 public class AccountsFrame extends javax.swing.JFrame {
-
     private static final Logger LOGGER = Logger.getLogger(AccountsFrame.class.getName());
     private static final String FONT_SEGOE_UI = "Segoe UI";
     private static final String FONT_ARABIC_FIXED = "Simplified Arabic Fixed";
@@ -34,9 +33,8 @@ public class AccountsFrame extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        javax.swing.JPanel mainPanel = new javax.swing.JPanel();
         javax.swing.JPanel headerPanel = new javax.swing.JPanel();
-        
+
         javax.swing.JLabel titleLabel = new javax.swing.JLabel();
         titleLabel.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 24));
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -72,7 +70,6 @@ public class AccountsFrame extends javax.swing.JFrame {
         backButton.addActionListener(evt -> handleBackButton());
 
         // Layout settings for components...
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         pack();
     }
