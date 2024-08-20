@@ -28,23 +28,23 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
 
         feedbackPanel.setBackground(new java.awt.Color(38, 25, 38));
 
-        titleLabel.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 24));
+        titleLabel.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 24)); 
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("FeedBacks");
 
         feedbackArea.setBackground(new java.awt.Color(0, 0, 0));
         feedbackArea.setColumns(20);
-        feedbackArea.setFont(new java.awt.Font(FONT_SEGOE_UI, 0, 14));
+        feedbackArea.setFont(new java.awt.Font(FONT_SEGOE_UI, 0, 14)); 
         feedbackArea.setForeground(new java.awt.Color(255, 255, 255));
         feedbackArea.setRows(5);
         feedbackScrollPane.setViewportView(feedbackArea);
 
         backToHomeButton.setBackground(new java.awt.Color(153, 0, 0));
-        backToHomeButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 15));
+        backToHomeButton.setFont(new java.awt.Font(FONT_SEGOE_UI, 1, 15)); 
         backToHomeButton.setForeground(new java.awt.Color(102, 255, 102));
         backToHomeButton.setText("Back To Home");
-        backToHomeButton.addActionListener(evt -> handleBackToHomeButton(evt));
+        backToHomeButton.addActionListener(this::handleBackToHomeButton);
 
         javax.swing.GroupLayout feedbackPanelLayout = new javax.swing.GroupLayout(feedbackPanel);
         feedbackPanel.setLayout(feedbackPanelLayout);
@@ -76,7 +76,7 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
         headerPanel.setBackground(new java.awt.Color(168, 215, 153));
         headerPanel.setForeground(new java.awt.Color(255, 255, 255));
 
-        appNameLabel.setFont(new java.awt.Font("Segoe Script", 1, 24));
+        appNameLabel.setFont(new java.awt.Font("Segoe Script", 1, 24)); 
         appNameLabel.setForeground(new java.awt.Color(26, 54, 50));
         appNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         appNameLabel.setText("Art Of Baking");
@@ -118,7 +118,7 @@ public class FeedBackManageFrame extends javax.swing.JFrame {
         pack();
     }
 
-    private void handleBackToHomeButton(java.awt.event.ActionEvent evt) {
+    private void handleBackToHomeButton() { // Removed the evt parameter
         Index index = new Index();
         index.setVisible(true);
         this.dispose();
