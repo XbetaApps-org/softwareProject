@@ -9,10 +9,8 @@ import java.util.logging.Logger;
 
 public class MailSender {
 
-    
     private static final Logger LOGGER = Logger.getLogger(MailSender.class.getName());
 
-    
     private MailSender() {
         throw new UnsupportedOperationException("Utility class cannot be instantiated");
     }
@@ -21,7 +19,7 @@ public class MailSender {
         try {
             String apiKey = "2b14f75b29mshb1f72f0726dd5cep15447ejsn6ce89eab052b";
             String apiHost = "mail-sender-api1.p.rapidapi.com";
-            String isHtml = "false";  
+            String isHtml = "false";
             String requestBody = String.format(
                 "{\"sendto\":\"%s\",\"name\":\"%s\",\"replyTo\":\"%s\",\"ishtml\":\"%s\",\"title\":\"%s\",\"body\":\"%s\",\"recipientName\":\"%s\"}",
                 recipientEmail, senderName, senderEmail, isHtml, subject, body, recipientName
@@ -36,10 +34,12 @@ public class MailSender {
                     .build();
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            LOGGER.log(Level.INFO, "Response: {0}", response.body()); 
-
+            LOGGER.log(Level.INFO, "Response: {0}", response.body());
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); 
+            LOGGER.log(Level.SEVERE, "Thread was interrupted during email sending", e);
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "An error occurred while sending the email", e);  
+            LOGGER.log(Level.SEVERE, "An error occurred while sending the email", e);
         }
     }
 }
