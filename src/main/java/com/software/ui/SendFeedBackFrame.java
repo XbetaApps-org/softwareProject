@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class SendFeedBackFrame extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
-    private String message;
+    private String message;  // Class-level variable for storing messages
 
     /**
      * Creates new form SendFeedBackFrame
@@ -181,7 +181,6 @@ public class SendFeedBackFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private String message;
     // End of variables declaration
 
     public String getMessage() {
