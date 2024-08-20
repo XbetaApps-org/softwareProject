@@ -30,7 +30,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JTextField userNameField;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JButton loginButton;
+
     private String message; // For storing login status messages
 
     public LoginFrame() {
@@ -51,7 +51,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error loading data from file: " + fileName, e);
         }
     }
 
@@ -71,8 +71,8 @@ public class LoginFrame extends javax.swing.JFrame {
         passwordField = new javax.swing.JPasswordField();
         jComboBox1 = new javax.swing.JComboBox<>(new String[]{ADMIN, USER, STORE_OWNER, SUPPLIER});
 
-        loginButton = new javax.swing.JButton("Login");
-        loginButton.addActionListener(evt -> loginButtonActionPerformed(evt));
+        javax.swing.JButton loginButton = new javax.swing.JButton("Login");
+        loginButton.addActionListener(this::loginButtonActionPerformed);
 
         // Layout settings for components (this is a simple layout example)
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -89,7 +89,7 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
     }
 
-    public void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String username = userNameField.getText();
         String password = new String(passwordField.getPassword());
         String hashedPassword = hashPassword(password);
@@ -148,6 +148,9 @@ public class LoginFrame extends javax.swing.JFrame {
                 SupplierIndex sindex = new SupplierIndex();
                 sindex.setVisible(true);
                 break;
+            default:
+                LOGGER.warning("Unknown user type: " + userType);
+                break;
         }
 
         this.dispose();
@@ -162,6 +165,7 @@ public class LoginFrame extends javax.swing.JFrame {
             case SUPPLIER:
                 return suppliers;
             default:
+                LOGGER.warning("Unknown user type: " + userType);
                 return new ArrayList<>();
         }
     }
@@ -176,7 +180,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Hashing algorithm not found", e);
             return null;
         }
     }
