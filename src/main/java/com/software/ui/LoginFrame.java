@@ -7,10 +7,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import com.software.models.User;
 
 public class LoginFrame extends javax.swing.JFrame {
+
+    private static final Logger LOGGER = Logger.getLogger(LoginFrame.class.getName());
 
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<User> owners = new ArrayList<>();
@@ -51,7 +55,7 @@ public class LoginFrame extends javax.swing.JFrame {
         try (BufferedReader reader = new BufferedReader(new FileReader("config.properties"))) {
             configProperties.load(reader);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error loading configuration properties", e);
         }
     }
 
