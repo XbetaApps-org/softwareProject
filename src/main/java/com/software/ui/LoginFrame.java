@@ -188,6 +188,24 @@ public class LoginFrame extends javax.swing.JFrame {
         }
     }
 
+    // Public setter methods for test access
+    public void setUserNameField(String username) {
+        this.userNameField.setText(username);
+    }
+
+    public void setPasswordField(String password) {
+        this.passwordField.setText(password);
+    }
+
+    public void setUserType(String userType) {
+        this.jComboBox1.setSelectedItem(userType);
+    }
+
+    // Public getter for the message (used in tests)
+    public String getDisplayedMessage() {
+        return message;
+    }
+
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> new LoginFrame().setVisible(true));
     }
