@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.*;
 import java.awt.Color;
@@ -16,7 +18,7 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class SignUpFrame extends javax.swing.JFrame {
-
+    private static final Logger LOGGER = Logger.getLogger(SignUpFrame.class.getName());
     private static final String FONT_ARABIC_FIXED = "Simplified Arabic Fixed";
     private static final String ERROR_TITLE = "Error";
 
@@ -40,14 +42,19 @@ public class SignUpFrame extends javax.swing.JFrame {
         PasswordConfirmField = new javax.swing.JPasswordField();
         PasswordField = new javax.swing.JPasswordField();
         SignUpButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
         jPanel1.setBackground(new java.awt.Color(38, 25, 38));
+
         jPanel2.setBackground(new java.awt.Color(168, 153, 15));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+
         jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(26, 54, 50));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Art Of Baking");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -64,45 +71,56 @@ public class SignUpFrame extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
+
         jPanel3.setBackground(new java.awt.Color(38, 25, 38));
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("SignUp page");
+
         userNameField.setBackground(new java.awt.Color(204, 255, 255));
         userNameField.setForeground(new java.awt.Color(0, 0, 0));
         userNameField.addActionListener(evt -> userNameFieldActionPerformed(evt));
+
         jLabel1.setFont(new java.awt.Font(FONT_ARABIC_FIXED, 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("User Name");
+
         EmailField.setBackground(new java.awt.Color(204, 255, 255));
         EmailField.setForeground(new java.awt.Color(0, 0, 0));
         EmailField.addActionListener(evt -> EmailFieldActionPerformed(evt));
+
         jLabel4.setFont(new java.awt.Font(FONT_ARABIC_FIXED, 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Email");
+
         jLabel5.setFont(new java.awt.Font(FONT_ARABIC_FIXED, 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Password");
+
         jLabel6.setFont(new java.awt.Font(FONT_ARABIC_FIXED, 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Confirm Password");
+
         PasswordConfirmField.setBackground(new java.awt.Color(153, 255, 255));
         PasswordConfirmField.setForeground(new java.awt.Color(0, 0, 0));
+
         SignUpButton.setBackground(new java.awt.Color(51, 102, 255));
         SignUpButton.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         SignUpButton.setForeground(new java.awt.Color(255, 255, 255));
         SignUpButton.setText("SignUp");
         SignUpButton.addActionListener(evt -> SignUpButtonActionPerformed(evt));
-        
+
         JLabel jLabel4_1 = new JLabel();
         jLabel4_1.setText("City");
         jLabel4_1.setForeground(Color.WHITE);
         jLabel4_1.setFont(new Font(FONT_ARABIC_FIXED, Font.BOLD, 14));
-        
+
         CityField = new JTextField();
         CityField.setForeground(Color.BLACK);
         CityField.setBackground(new Color(204, 255, 255));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(Alignment.LEADING)
@@ -169,6 +187,7 @@ public class SignUpFrame extends javax.swing.JFrame {
                             .addGap(26))))
         );
         jPanel3.setLayout(jPanel3Layout);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -183,6 +202,7 @@ public class SignUpFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,14 +213,15 @@ public class SignUpFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
         pack();
     }
 
-    private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void EmailFieldActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void EmailFieldActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -235,7 +256,7 @@ public class SignUpFrame extends javax.swing.JFrame {
                 welcomeFrame.setVisible(true);
                 this.dispose();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Error writing user data to file", e); // Use logging instead of printStackTrace
             }
         }
     }
@@ -252,7 +273,7 @@ public class SignUpFrame extends javax.swing.JFrame {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error reading user data from file", e); // Use logging instead of printStackTrace
         }
         return false;
     }
@@ -263,7 +284,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         return pattern.matcher(email).matches();
     }
 
-    private void PasswordConfirmFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+    private void PasswordConfirmFieldActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -324,9 +345,8 @@ public class SignUpFrame extends javax.swing.JFrame {
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "MD5 algorithm not found", e); // Use logging instead of printStackTrace
             return null;
         }
     }
 }
-
