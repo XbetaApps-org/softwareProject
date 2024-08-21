@@ -1,14 +1,16 @@
 package com.software.ui;
 
 import java.awt.EventQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 public class SupplierIndex extends JFrame {
-
     private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = Logger.getLogger(SupplierIndex.class.getName());
     private JPanel contentPane;
 
     /**
@@ -20,7 +22,7 @@ public class SupplierIndex extends JFrame {
                 SupplierIndex frame = new SupplierIndex();
                 frame.setVisible(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "An error occurred while launching the SupplierIndex frame", e);  // Replaced printStackTrace with logging
             }
         });
     }
