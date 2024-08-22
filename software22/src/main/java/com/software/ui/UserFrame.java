@@ -4,6 +4,23 @@
  */
 package com.software.ui;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Omar Khatib
@@ -16,7 +33,8 @@ public class UserFrame extends javax.swing.JFrame {
     public UserFrame() {
         initComponents();
     }
-
+    boolean b = true;
+    String name = "User";
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,7 +44,7 @@ public class UserFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        SupplierTabbedPane = new javax.swing.JTabbedPane();
+        UserTabbedPane = new javax.swing.JTabbedPane();
         WelcomePanel = new javax.swing.JPanel();
         UserManagementPanel = new javax.swing.JPanel();
         UserManageTools = new javax.swing.JPanel();
@@ -51,8 +69,26 @@ public class UserFrame extends javax.swing.JFrame {
         RecipeFeedbackBtn = new javax.swing.JButton();
         AllergicCheckBox = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        OrdersTxtArea = new javax.swing.JTextArea();
-        SupplierBtnsPanel = new javax.swing.JPanel();
+        RecipesAndProductsTxtArea = new javax.swing.JTextArea();
+        CommunicationPanel = new javax.swing.JPanel();
+        ProductsTools1 = new javax.swing.JPanel();
+        ProductsLabel1 = new javax.swing.JLabel();
+        SolidLineLabel2 = new javax.swing.JLabel();
+        RecipientL = new javax.swing.JLabel();
+        MessageL = new javax.swing.JLabel();
+        RecipientT = new javax.swing.JTextField();
+        MessageT = new javax.swing.JTextField();
+        SendMsgT = new javax.swing.JButton();
+        OrdersPanel = new javax.swing.JPanel();
+        ProductsTools2 = new javax.swing.JPanel();
+        ProductsLabel2 = new javax.swing.JLabel();
+        SolidLineLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        ProductComboBox = new javax.swing.JComboBox<>();
+        SupplierComboBox = new javax.swing.JComboBox<>();
+        UserBtnsPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         MngAccountBtn = new javax.swing.JButton();
         ProductsBtn = new javax.swing.JButton();
         OrdersBtn = new javax.swing.JButton();
@@ -60,7 +96,7 @@ public class UserFrame extends javax.swing.JFrame {
         CommunicationBtn = new javax.swing.JButton();
         NotificationsBtn = new javax.swing.JButton();
         LogOutBtn = new javax.swing.JButton();
-        WelcomeSupplierLabel = new javax.swing.JLabel();
+        WelcomeUserLabel = new javax.swing.JLabel();
         CakeImage = new javax.swing.JLabel();
         CE121Label = new javax.swing.JLabel();
         BackgroundPanel = new javax.swing.JPanel();
@@ -70,7 +106,7 @@ public class UserFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SupplierTabbedPane.setBackground(new java.awt.Color(255, 255, 255,0));
+        UserTabbedPane.setBackground(new java.awt.Color(255, 255, 255,0));
 
         WelcomePanel.setBackground(new java.awt.Color(255, 255, 255,0));
 
@@ -85,7 +121,7 @@ public class UserFrame extends javax.swing.JFrame {
             .addGap(0, 805, Short.MAX_VALUE)
         );
 
-        SupplierTabbedPane.addTab("tab4", WelcomePanel);
+        UserTabbedPane.addTab("tab4", WelcomePanel);
 
         UserManagementPanel.setBackground(new java.awt.Color(255, 255, 255,0));
 
@@ -136,6 +172,11 @@ public class UserFrame extends javax.swing.JFrame {
         OkButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         OkButton.setForeground(new java.awt.Color(0, 0, 0));
         OkButton.setText("OK");
+        OkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OkButtonActionPerformed(evt);
+            }
+        });
 
         SolidLineLabel.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\Line.png")); // NOI18N
 
@@ -219,7 +260,7 @@ public class UserFrame extends javax.swing.JFrame {
                 .addGap(97, 97, 97))
         );
 
-        SupplierTabbedPane.addTab("tab1", UserManagementPanel);
+        UserTabbedPane.addTab("tab1", UserManagementPanel);
 
         ProductsPanel.setBackground(new java.awt.Color(255, 255, 255,0));
 
@@ -236,32 +277,52 @@ public class UserFrame extends javax.swing.JFrame {
         ShowPostsBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         ShowPostsBtn.setForeground(new java.awt.Color(0, 0, 0));
         ShowPostsBtn.setText("Show Posts");
+        ShowPostsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowPostsBtnActionPerformed(evt);
+            }
+        });
 
         ProductFeedBackBtn.setBackground(new java.awt.Color(6, 134, 161));
         ProductFeedBackBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         ProductFeedBackBtn.setForeground(new java.awt.Color(0, 0, 0));
         ProductFeedBackBtn.setText("Product Feedback");
+        ProductFeedBackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProductFeedBackBtnActionPerformed(evt);
+            }
+        });
 
         ShowRecipeBtn.setBackground(new java.awt.Color(6, 134, 161));
         ShowRecipeBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         ShowRecipeBtn.setForeground(new java.awt.Color(0, 0, 0));
         ShowRecipeBtn.setText("Show Recipes");
+        ShowRecipeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowRecipeBtnActionPerformed(evt);
+            }
+        });
 
         RecipeFeedbackBtn.setBackground(new java.awt.Color(6, 134, 161));
         RecipeFeedbackBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         RecipeFeedbackBtn.setForeground(new java.awt.Color(0, 0, 0));
         RecipeFeedbackBtn.setText("Recipe Feedback");
+        RecipeFeedbackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecipeFeedbackBtnActionPerformed(evt);
+            }
+        });
 
         AllergicCheckBox.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         AllergicCheckBox.setForeground(new java.awt.Color(0, 0, 0));
         AllergicCheckBox.setText("Allergic");
         AllergicCheckBox.setToolTipText("");
 
-        OrdersTxtArea.setColumns(20);
-        OrdersTxtArea.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        OrdersTxtArea.setForeground(new java.awt.Color(0, 0, 0));
-        OrdersTxtArea.setRows(5);
-        jScrollPane1.setViewportView(OrdersTxtArea);
+        RecipesAndProductsTxtArea.setColumns(20);
+        RecipesAndProductsTxtArea.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        RecipesAndProductsTxtArea.setForeground(new java.awt.Color(0, 0, 0));
+        RecipesAndProductsTxtArea.setRows(5);
+        jScrollPane1.setViewportView(RecipesAndProductsTxtArea);
 
         javax.swing.GroupLayout ProductsToolsLayout = new javax.swing.GroupLayout(ProductsTools);
         ProductsTools.setLayout(ProductsToolsLayout);
@@ -332,12 +393,224 @@ public class UserFrame extends javax.swing.JFrame {
                 .addGap(97, 97, 97))
         );
 
-        SupplierTabbedPane.addTab("tab2", ProductsPanel);
+        UserTabbedPane.addTab("tab2", ProductsPanel);
 
-        getContentPane().add(SupplierTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, -40, 1080, 840));
+        CommunicationPanel.setBackground(new java.awt.Color(255, 255, 255,0));
 
-        SupplierBtnsPanel.setBackground(new java.awt.Color(255, 255, 255,150));
-        SupplierBtnsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        ProductsTools1.setBackground(new java.awt.Color(153, 153, 153,180));
+
+        ProductsLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        ProductsLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        ProductsLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        ProductsLabel1.setText("Communication");
+
+        SolidLineLabel2.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\Line.png")); // NOI18N
+
+        RecipientL.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        RecipientL.setForeground(new java.awt.Color(0, 0, 0));
+        RecipientL.setText("Recipient :");
+
+        MessageL.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        MessageL.setForeground(new java.awt.Color(0, 0, 0));
+        MessageL.setText("Message :");
+
+        RecipientT.setBackground(new java.awt.Color(255, 255, 255));
+        RecipientT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        MessageT.setBackground(new java.awt.Color(255, 255, 255));
+        MessageT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        SendMsgT.setBackground(new java.awt.Color(6, 134, 161));
+        SendMsgT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        SendMsgT.setForeground(new java.awt.Color(0, 0, 0));
+        SendMsgT.setText("Send Message");
+        SendMsgT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SendMsgTActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ProductsTools1Layout = new javax.swing.GroupLayout(ProductsTools1);
+        ProductsTools1.setLayout(ProductsTools1Layout);
+        ProductsTools1Layout.setHorizontalGroup(
+            ProductsTools1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductsTools1Layout.createSequentialGroup()
+                .addGroup(ProductsTools1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ProductsTools1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(SolidLineLabel2))
+                    .addGroup(ProductsTools1Layout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addGroup(ProductsTools1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(ProductsTools1Layout.createSequentialGroup()
+                                .addComponent(RecipientL, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(RecipientT, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ProductsTools1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(ProductsTools1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(SendMsgT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(ProductsTools1Layout.createSequentialGroup()
+                                        .addComponent(MessageL, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(MessageT))))))
+                    .addGroup(ProductsTools1Layout.createSequentialGroup()
+                        .addGap(289, 289, 289)
+                        .addComponent(ProductsLabel1)))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+        ProductsTools1Layout.setVerticalGroup(
+            ProductsTools1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductsTools1Layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(ProductsLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SolidLineLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addGroup(ProductsTools1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RecipientL, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RecipientT, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
+                .addGroup(ProductsTools1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MessageT, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MessageL, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63)
+                .addComponent(SendMsgT)
+                .addContainerGap(102, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout CommunicationPanelLayout = new javax.swing.GroupLayout(CommunicationPanel);
+        CommunicationPanel.setLayout(CommunicationPanelLayout);
+        CommunicationPanelLayout.setHorizontalGroup(
+            CommunicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CommunicationPanelLayout.createSequentialGroup()
+                .addContainerGap(161, Short.MAX_VALUE)
+                .addComponent(ProductsTools1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
+        );
+        CommunicationPanelLayout.setVerticalGroup(
+            CommunicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CommunicationPanelLayout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
+                .addComponent(ProductsTools1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
+        );
+
+        UserTabbedPane.addTab("tab2", CommunicationPanel);
+
+        OrdersPanel.setBackground(new java.awt.Color(255, 255, 255,0));
+
+        ProductsTools2.setBackground(new java.awt.Color(153, 153, 153,180));
+
+        ProductsLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        ProductsLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        ProductsLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        ProductsLabel2.setText("Orders");
+
+        SolidLineLabel3.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\Line.png")); // NOI18N
+
+        jButton1.setBackground(new java.awt.Color(6, 134, 161));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("Make Order");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(6, 134, 161));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setText("Show Orders");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        ProductComboBox.setBackground(new java.awt.Color(255, 255, 255));
+        ProductComboBox.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        ProductComboBox.setForeground(new java.awt.Color(0, 0, 0));
+        ProductComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select" }));
+
+        SupplierComboBox.setBackground(new java.awt.Color(255, 255, 255));
+        SupplierComboBox.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        SupplierComboBox.setForeground(new java.awt.Color(0, 0, 0));
+        SupplierComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select" }));
+        SupplierComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SupplierComboBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ProductsTools2Layout = new javax.swing.GroupLayout(ProductsTools2);
+        ProductsTools2.setLayout(ProductsTools2Layout);
+        ProductsTools2Layout.setHorizontalGroup(
+            ProductsTools2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductsTools2Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(SolidLineLabel3)
+                .addContainerGap(56, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductsTools2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ProductsTools2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductsTools2Layout.createSequentialGroup()
+                        .addComponent(ProductsLabel2)
+                        .addGap(338, 338, 338))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductsTools2Layout.createSequentialGroup()
+                        .addGroup(ProductsTools2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(SupplierComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ProductComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(278, 278, 278))))
+        );
+        ProductsTools2Layout.setVerticalGroup(
+            ProductsTools2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductsTools2Layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(ProductsLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SolidLineLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(57, 57, 57)
+                .addComponent(SupplierComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ProductComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout OrdersPanelLayout = new javax.swing.GroupLayout(OrdersPanel);
+        OrdersPanel.setLayout(OrdersPanelLayout);
+        OrdersPanelLayout.setHorizontalGroup(
+            OrdersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OrdersPanelLayout.createSequentialGroup()
+                .addContainerGap(161, Short.MAX_VALUE)
+                .addComponent(ProductsTools2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
+        );
+        OrdersPanelLayout.setVerticalGroup(
+            OrdersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OrdersPanelLayout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
+                .addComponent(ProductsTools2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
+        );
+
+        UserTabbedPane.addTab("tab2", OrdersPanel);
+
+        getContentPane().add(UserTabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, -40, 1080, 840));
+
+        UserBtnsPanel.setBackground(new java.awt.Color(255, 255, 255,150));
+        UserBtnsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\circle.png")); // NOI18N
+        jLabel1.setEnabled(false);
+        UserBtnsPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 490, 20, 30));
 
         MngAccountBtn.setBackground(new java.awt.Color(6, 134, 161));
         MngAccountBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -348,7 +621,7 @@ public class UserFrame extends javax.swing.JFrame {
                 MngAccountBtnActionPerformed(evt);
             }
         });
-        SupplierBtnsPanel.add(MngAccountBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 100, 257, 70));
+        UserBtnsPanel.add(MngAccountBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 100, 257, 70));
 
         ProductsBtn.setBackground(new java.awt.Color(6, 134, 161));
         ProductsBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -359,7 +632,7 @@ public class UserFrame extends javax.swing.JFrame {
                 ProductsBtnActionPerformed(evt);
             }
         });
-        SupplierBtnsPanel.add(ProductsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 180, 260, 70));
+        UserBtnsPanel.add(ProductsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 180, 260, 70));
 
         OrdersBtn.setBackground(new java.awt.Color(6, 134, 161));
         OrdersBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -370,7 +643,7 @@ public class UserFrame extends javax.swing.JFrame {
                 OrdersBtnActionPerformed(evt);
             }
         });
-        SupplierBtnsPanel.add(OrdersBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 260, 257, 70));
+        UserBtnsPanel.add(OrdersBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 260, 257, 70));
 
         RecipesBtn.setBackground(new java.awt.Color(6, 134, 161));
         RecipesBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -381,7 +654,7 @@ public class UserFrame extends javax.swing.JFrame {
                 RecipesBtnActionPerformed(evt);
             }
         });
-        SupplierBtnsPanel.add(RecipesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 340, 257, 70));
+        UserBtnsPanel.add(RecipesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 340, 257, 70));
 
         CommunicationBtn.setBackground(new java.awt.Color(6, 134, 161));
         CommunicationBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -392,7 +665,7 @@ public class UserFrame extends javax.swing.JFrame {
                 CommunicationBtnActionPerformed(evt);
             }
         });
-        SupplierBtnsPanel.add(CommunicationBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 420, 257, 70));
+        UserBtnsPanel.add(CommunicationBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 420, 257, 70));
 
         NotificationsBtn.setBackground(new java.awt.Color(6, 134, 161));
         NotificationsBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -403,7 +676,7 @@ public class UserFrame extends javax.swing.JFrame {
                 NotificationsBtnActionPerformed(evt);
             }
         });
-        SupplierBtnsPanel.add(NotificationsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 500, 257, 70));
+        UserBtnsPanel.add(NotificationsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 500, 257, 70));
 
         LogOutBtn.setBackground(new java.awt.Color(236, 170, 73));
         LogOutBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -414,27 +687,27 @@ public class UserFrame extends javax.swing.JFrame {
                 LogOutBtnActionPerformed(evt);
             }
         });
-        SupplierBtnsPanel.add(LogOutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 580, 257, 70));
+        UserBtnsPanel.add(LogOutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 580, 257, 70));
 
-        WelcomeSupplierLabel.setBackground(new java.awt.Color(0, 0, 0));
-        WelcomeSupplierLabel.setFont(new java.awt.Font("MV Boli", 1, 28)); // NOI18N
-        WelcomeSupplierLabel.setText("Welcome User");
-        WelcomeSupplierLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        WelcomeUserLabel.setBackground(new java.awt.Color(0, 0, 0));
+        WelcomeUserLabel.setFont(new java.awt.Font("MV Boli", 1, 28)); // NOI18N
+        WelcomeUserLabel.setText("Welcome User");
+        WelcomeUserLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                WelcomeSupplierLabelMouseClicked(evt);
+                WelcomeUserLabelMouseClicked(evt);
             }
         });
-        SupplierBtnsPanel.add(WelcomeSupplierLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 200, 61));
+        UserBtnsPanel.add(WelcomeUserLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 200, 61));
 
         CakeImage.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\cake (1).png")); // NOI18N
-        SupplierBtnsPanel.add(CakeImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 680, -1, -1));
+        UserBtnsPanel.add(CakeImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 680, -1, -1));
 
         CE121Label.setBackground(new java.awt.Color(0, 0, 0));
         CE121Label.setFont(new java.awt.Font("Pristina", 1, 14)); // NOI18N
         CE121Label.setText("CE.121");
-        SupplierBtnsPanel.add(CE121Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 730, 40, -1));
+        UserBtnsPanel.add(CE121Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 730, 40, -1));
 
-        getContentPane().add(SupplierBtnsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 800));
+        getContentPane().add(UserBtnsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 800));
 
         BackgroundPanel.setBackground(new java.awt.Color(255, 255, 255,0));
 
@@ -467,24 +740,383 @@ public class UserFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>                        
 
+    private void loadUserData() {
+        String username = UserMngUsernameTxt.getText();
+
+        try {
+            File file = new File("Users.txt");
+            boolean userFound;
+            try (Scanner scanner = new Scanner(file)) {
+                userFound = false;
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] parts = line.split(",");
+                    
+                    if (parts[0].equals(username)) {
+                        userFound = true;
+                        // Fill the text fields with the corresponding data
+                        UserMngPasswordTxt.setText(parts[1]);
+                        UserMngEmailTxt.setText(parts[2]);
+                        UserMngCityTxt.setText(parts[3]);
+                        break;
+                    }
+                }
+            }
+
+            if (!userFound) {
+                JOptionPane.showMessageDialog(null, "User not found.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error reading file.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void sendMessage(String filename) {
+
+        String recipientName = RecipientT.getText();
+        String message = MessageT.getText(); 
+
+        // Check if both recipient name and message are provided
+        if (recipientName != null && !recipientName.trim().isEmpty() && message != null && !message.trim().isEmpty() && (checkIfExists("Suppliers.txt", recipientName) || checkIfExists("Owners.txt", recipientName))) {
+            try {
+                FileWriter fileWriter = new FileWriter(filename, true); // 'true' to append to the file
+                PrintWriter printWriter = new PrintWriter(fileWriter);
+                printWriter.println(recipientName + "," + name + "," + message);
+                printWriter.close(); 
+                JOptionPane.showMessageDialog(null, "Message sent successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error sending message.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }else if(!(checkIfExists("Suppliers.txt", recipientName) || checkIfExists("Owners.txt", recipientName))){
+            JOptionPane.showMessageDialog(null, "Recipient not found! ", "Warning", JOptionPane.WARNING_MESSAGE);
+
+        }else {
+            JOptionPane.showMessageDialog(null, "Recipient name and message are required.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    private boolean checkIfExists(String filename, String name) {
+    File file = new File(filename);
+    try {
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(",");
+
+            // Check if any part matches the name (ignoring case)
+            for (String part : parts) {
+                if (part.trim().equalsIgnoreCase(name)) {
+                    scanner.close();
+                    return true;
+                }
+            }
+        }
+        scanner.close();
+    } catch (IOException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error reading file: " + filename, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    return false;
+}
+    private void deleteLineFromFile(String filename, String lineToRemove) {
+    File file = new File(filename);
+    ArrayList<String> lines = new ArrayList<>();
+
+    // Read the file and keep all lines except the one to be removed
+    try {
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (!line.trim().equals(lineToRemove.trim())) {
+                lines.add(line);
+            }
+        }
+        scanner.close();
+
+        // Write the remaining lines back to the file
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        for (String line : lines) {
+            printWriter.println(line);
+        }
+        printWriter.close();
+
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
+    private void showNotifications() {
+    File file = new File("Message_All.txt");
+    StringBuilder data = new StringBuilder();
+
+    try {
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(","); 
+            if(parts[0].equals(name))
+            {
+                // Append each item's data to the StringBuilder
+                data.append("Message from ").append(parts[1])
+                    .append(" :\n").append("  ")
+                    .append(parts[2])
+                    .append("\n\n");
+                deleteLineFromFile("Message_All.txt",line);
+            }
+        }
+        scanner.close();
+
+        // Display the data in a JOptionPane
+        JOptionPane.showMessageDialog(null, data.toString(), name + " Notifications", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (IOException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error reading file.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    private void updateUser() {
+        if(UserMngUsernameTxt.getText().equals("") || UserMngPasswordTxt.getText().equals("") || UserMngEmailTxt.getText().equals("") || UserMngCityTxt.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Username or password or email or city cannot be empty!", null, JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            String username = UserMngUsernameTxt.getText();
+            String password = UserMngPasswordTxt.getText();
+            String email = UserMngEmailTxt.getText();
+            String city = UserMngCityTxt.getText();
+
+            try {
+                File file = new File("Users.txt");
+                ArrayList <String> lines = new ArrayList<>();
+                boolean userFound;
+                try (Scanner scanner = new Scanner(file)) {
+                    userFound = false;
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine();
+                        String[] parts = line.split(",");
+                        if (parts[0].equals(username)) {
+                            userFound = true;
+                            String oldPassword = JOptionPane.showInputDialog(null, "Please enter the old password to continue :");
+                            
+                            if (oldPassword != null && oldPassword.equals(parts[1])) {
+                                // Update the user data
+                                line = username + "," + password + "," + email + "," + city;
+                                JOptionPane.showMessageDialog(null, "User info updated successfully.");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Incorrect old password.", "Error", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                        }
+                        lines.add(line);
+                    }
+                }
+
+                if (userFound) {
+                    PrintWriter writer = new PrintWriter(new FileWriter(file));
+                    for (String line : lines) {
+                        writer.println(line);
+                    }
+                    writer.close();
+                } else {
+                    JOptionPane.showMessageDialog(null, "User not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    private void showOrders() {
+    File file = new File("Orders.txt");
+    StringBuilder data = new StringBuilder();  
+    try {
+        Scanner scanner = new Scanner(file);
+        int i = 1;
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(","); 
+            if(parts[0].equals(name))
+            {   
+                // Append each item's data to the StringBuilder
+                data.append("Order number ")
+                    .append(i).append(" :\n").append(" ")
+                    .append(parts[3]).append(" piece/'s of ").append(parts[2])
+                    .append(" from ").append(parts[1])
+                    .append("\n\n");
+                i++;
+            }
+        }
+        scanner.close();
+        if(data.isEmpty())
+            data.append("There is no orders!");    
+        // Display the data in a JOptionPane
+        JOptionPane.showMessageDialog(null, data.toString(), name + " Orders", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (IOException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error reading file.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    private void makeOrder() {
+    String storeOwnerName = name; // Assuming 'Name' is a global variable for the Store Owner's name
+    String supplierName = SupplierComboBox.getSelectedItem().toString();    //JOptionPane.showInputDialog(null, "Enter Supplier Name:", "Supplier", JOptionPane.QUESTION_MESSAGE);
+    String productName = ProductComboBox.getSelectedItem().toString();  //JOptionPane.showInputDialog(null, "Enter Product Name:", "Product", JOptionPane.QUESTION_MESSAGE);
+    String productCount = JOptionPane.showInputDialog(null, "Enter The count you want:", "Product", JOptionPane.QUESTION_MESSAGE);
+    
+
+    // Check if the supplier and product names are provided
+    if (supplierName != null && productName != null) {
+        boolean ownerExists = checkIfExists("Owners.txt", supplierName);
+        boolean productExists = checkIfExists("OwnerProducts.txt", productName);
+
+        if (ownerExists && productExists) {
+            try {
+                FileWriter fileWriter = new FileWriter("Orders.txt", true); // 'true' to append to the file
+                PrintWriter printWriter = new PrintWriter(fileWriter);
+
+                // Write the order details in the specified format
+                printWriter.println(storeOwnerName + "," + supplierName + "," + productName + "," + productCount);
+
+                printWriter.close();
+                SupplierComboBox.setSelectedIndex(0);
+                ProductComboBox.setSelectedIndex(0);
+                JOptionPane.showMessageDialog(null, "Order saved successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error saving order.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            String errorMessage = "Order not saved. ";
+            if (SupplierComboBox.getSelectedIndex() == 0 || ProductComboBox.getSelectedIndex() == 0) {
+                errorMessage += "All fields are required. ";
+                JOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!ownerExists) errorMessage += "Supplier not found. ";
+            if (!productExists) errorMessage += "Product not found.";
+            JOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Order not saved. All fields are required.", "Warning", JOptionPane.WARNING_MESSAGE);
+    }
+}
+    public void searchByNames() {
+        String fileName = "OwnerProducts.txt";
+        HashSet<String> printedNames = new HashSet<>();
+        b = false;
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            if ((line = br.readLine()) != null) {
+                // First line is skipped
+            }
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length > 0 && parts[0].equals(SupplierComboBox.getSelectedItem())) {         
+                    String Name = parts[1];
+                    if (!printedNames.contains(Name)) {
+                        printedNames.add(Name);
+                        ProductComboBox.addItem(Name);       
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void printUniqueFirstNames() {
+        String fileName = "Owners.txt";
+        HashSet<String> printedNames = new HashSet<>();
+        b = false;
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            if ((line = br.readLine()) != null) {
+                // First line is skipped
+            }
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length > 0) {
+                    String firstName = parts[0];
+                    if (!printedNames.contains(firstName)) {
+                        printedNames.add(firstName);
+                        SupplierComboBox.addItem(firstName);       
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void showRecipe() {
+    File file = new File("Recipes.txt");
+    StringBuilder data = new StringBuilder();
+    RecipesAndProductsTxtArea.setText("");
+    try {
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(",");  
+             if(AllergicCheckBox.isSelected() && parts[2].equals("yes")){
+                data.append("~Recipe")
+                    .append(" from: ").append(parts[0])
+                    .append("\n~Recipe's name is ( ").append(parts[1]).append(" ) ")
+                    .append("and it is Allergic!");
+                data.append("\n~How to make it? :").append(parts[3])
+                    .append("\n\n");     
+             }
+             else if (!AllergicCheckBox.isSelected() && parts[2].equals("no")){       
+               data.append("~Recipe")
+                    .append(" from: ").append(parts[0])
+                    .append("\n~Recipe's name is ( ").append(parts[1]).append(" ) ")
+                    .append("and it is not Allergic!");
+                data.append("\n~How to make it? :").append(parts[3])
+                    .append("\n\n");    
+             }
+        }
+        scanner.close();
+
+        // Display the data in a txtArea
+        RecipesAndProductsTxtArea.append(data.toString());
+        
+
+    } catch (IOException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error reading file.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    
     private void MngAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        SupplierTabbedPane.setSelectedIndex(1);
+        UserTabbedPane.setSelectedIndex(1);
+        UserMngUsernameTxt.setText(name);
+        loadUserData();    
     }                                             
 
     private void ProductsBtnActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        SupplierTabbedPane.setSelectedIndex(2);
+        UserTabbedPane.setSelectedIndex(2);
     }                                           
 
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        SupplierTabbedPane.setSelectedIndex(0);
+        UserTabbedPane.setSelectedIndex(4);
+        if(b)
+            printUniqueFirstNames();
     }                                         
 
     private void CommunicationBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        SupplierTabbedPane.setSelectedIndex(0);
+        UserTabbedPane.setSelectedIndex(3);
     }                                                
 
     private void NotificationsBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        SupplierTabbedPane.setSelectedIndex(0);
+        UserTabbedPane.setSelectedIndex(0);
+        if(jLabel1.isEnabled())
+        {
+            showNotifications(); 
+            jLabel1.setEnabled(false);
+        }
+        else
+            JOptionPane.showMessageDialog(null, "There is no any Notification! ");
     }                                                
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -492,13 +1124,140 @@ public class UserFrame extends javax.swing.JFrame {
         new LoginFrame().setVisible(true);
     }                                         
 
-    private void WelcomeSupplierLabelMouseClicked(java.awt.event.MouseEvent evt) {                                                  
-        SupplierTabbedPane.setSelectedIndex(0);
-    }                                                 
+    private void WelcomeUserLabelMouseClicked(java.awt.event.MouseEvent evt) {                                              
+        UserTabbedPane.setSelectedIndex(0);
+    }                                             
 
     private void RecipesBtnActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        SupplierTabbedPane.setSelectedIndex(0);
+        UserTabbedPane.setSelectedIndex(0);
+        String dessertName = JOptionPane.showInputDialog(this, "Enter the dessert name:");
+        if (dessertName == null || dessertName.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid dessert name.");
+            return;
+        }
+
+        // Prompt user for allergic information (Yes or No)
+        String allergicInput = JOptionPane.showInputDialog(this, "Is the dessert allergic? (Yes or No):");
+        if (allergicInput == null || allergicInput.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please specify if the dessert is allergic.");
+            return;
+        }
+
+        boolean isAllergic = allergicInput.equalsIgnoreCase("yes");
+
+        // Prompt user for the recipe
+        String recipe = JOptionPane.showInputDialog(this, "Enter the recipe:");
+        if (recipe == null || recipe.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter the recipe.");
+            return;
+        }
+        
+        String newEntry = String.format("%s%s,%s,%s",
+                name,
+                dessertName,
+                isAllergic,
+                recipe);
+        
+        try {
+            Files.write(Paths.get("Recipes.txt"), (newEntry + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException ex) {
+            Logger.getLogger(UserFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        JOptionPane.showMessageDialog(this, "Dessert added successfully!");
     }                                          
+
+    private void SendMsgTActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        sendMessage("Message_All.txt");
+        RecipientT.setText("");
+        MessageT.setText(""); 
+    }                                        
+
+    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        updateUser();
+    }                                        
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        makeOrder();
+    }                                        
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        showOrders();
+    }                                        
+
+    private void SupplierComboBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        ProductComboBox.removeAllItems();
+        ProductComboBox.addItem("Select");
+        searchByNames();
+    }                                                
+
+    private void ShowRecipeBtnActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        showRecipe();
+    }                                             
+
+    private void ShowPostsBtnActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        try {
+        List<String> posts = Files.readAllLines(Paths.get("UserPosts.txt"));
+        String content = String.join("\n", posts);
+        RecipesAndProductsTxtArea.setText(content);
+        } catch (IOException ex) {
+        JOptionPane.showMessageDialog(this, "Error reading UserPosts.txt: " + ex.getMessage());
+        }
+    }                                            
+
+    private void ProductFeedBackBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        String username = JOptionPane.showInputDialog(this, "Enter the username of the supplier or owner:");
+        if (username == null || username.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a username.");
+            return;
+        }
+
+        String productName = JOptionPane.showInputDialog(this, "Enter the product name:");
+        if (productName == null || productName.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter the product name.");
+            return;
+        }
+
+        String feedback = JOptionPane.showInputDialog(this, "Enter your feedback:");
+        if (feedback == null || feedback.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter your feedback.");
+            return;
+        }
+
+        boolean feedbackAdded = false;
+ 
+        if (feedbackAdded) {
+            JOptionPane.showMessageDialog(this, "Feedback added successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Supplier/Owner or product not found.");
+        }
+    }                                                  
+
+    private void RecipeFeedbackBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // Prompt the user to enter the username
+        String username = JOptionPane.showInputDialog(this, "Enter the username:");
+        if (username == null || username.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a username.");
+            return;
+        }
+
+        // Prompt the user to enter the recipe name
+        String recipeName = JOptionPane.showInputDialog(this, "Enter the recipe name:");
+        if (recipeName == null || recipeName.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter the recipe name.");
+            return;
+        }
+
+        // Prompt the user to enter the feedback
+        String feedback = JOptionPane.showInputDialog(this, "Enter your feedback:");
+        if (feedback == null || feedback.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter your feedback.");
+            return;
+        }
+
+        // Show success message
+        JOptionPane.showMessageDialog(this, "Feedback added and database updated successfully!");
+    
+    }                                                 
 
     /**
      * @param args the command line arguments
@@ -543,37 +1302,55 @@ public class UserFrame extends javax.swing.JFrame {
     private javax.swing.JLabel CakeImage;
     private javax.swing.JLabel CityLabel;
     private javax.swing.JButton CommunicationBtn;
+    private javax.swing.JPanel CommunicationPanel;
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JButton LogOutBtn;
     private javax.swing.JLabel ManageAccLabel;
+    private javax.swing.JLabel MessageL;
+    private javax.swing.JTextField MessageT;
     private javax.swing.JButton MngAccountBtn;
     private javax.swing.JButton NotificationsBtn;
     private javax.swing.JButton OkButton;
     private javax.swing.JButton OrdersBtn;
-    private javax.swing.JTextArea OrdersTxtArea;
+    private javax.swing.JPanel OrdersPanel;
     private javax.swing.JLabel PasswordLabel;
+    private javax.swing.JComboBox<String> ProductComboBox;
     private javax.swing.JButton ProductFeedBackBtn;
     private javax.swing.JButton ProductsBtn;
     private javax.swing.JLabel ProductsLabel;
+    private javax.swing.JLabel ProductsLabel1;
+    private javax.swing.JLabel ProductsLabel2;
     private javax.swing.JPanel ProductsPanel;
     private javax.swing.JPanel ProductsTools;
+    private javax.swing.JPanel ProductsTools1;
+    private javax.swing.JPanel ProductsTools2;
     private javax.swing.JButton RecipeFeedbackBtn;
+    private javax.swing.JTextArea RecipesAndProductsTxtArea;
     private javax.swing.JButton RecipesBtn;
+    private javax.swing.JLabel RecipientL;
+    private javax.swing.JTextField RecipientT;
+    private javax.swing.JButton SendMsgT;
     private javax.swing.JButton ShowPostsBtn;
     private javax.swing.JButton ShowRecipeBtn;
     private javax.swing.JLabel SolidLineLabel;
     private javax.swing.JLabel SolidLineLabel1;
-    private javax.swing.JPanel SupplierBtnsPanel;
-    private javax.swing.JTabbedPane SupplierTabbedPane;
+    private javax.swing.JLabel SolidLineLabel2;
+    private javax.swing.JLabel SolidLineLabel3;
+    private javax.swing.JComboBox<String> SupplierComboBox;
+    private javax.swing.JPanel UserBtnsPanel;
     private javax.swing.JPanel UserManageTools;
     private javax.swing.JPanel UserManagementPanel;
     private javax.swing.JTextField UserMngCityTxt;
     private javax.swing.JTextField UserMngEmailTxt;
     private javax.swing.JTextField UserMngPasswordTxt;
     private javax.swing.JTextField UserMngUsernameTxt;
+    private javax.swing.JTabbedPane UserTabbedPane;
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JPanel WelcomePanel;
-    private javax.swing.JLabel WelcomeSupplierLabel;
+    public javax.swing.JLabel WelcomeUserLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    public javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration                   
 }

@@ -4,6 +4,13 @@
  */
 package com.software.ui;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,6 +47,10 @@ public class LoginFrame extends javax.swing.JFrame {
         doesnt = new javax.swing.JLabel();
         signUpBtn = new javax.swing.JButton();
         PasswordField = new javax.swing.JPasswordField();
+        SupplierLoginCheckBox1 = new javax.swing.JCheckBox();
+        OwnerLoginCheckBox1 = new javax.swing.JCheckBox();
+        UserLoginCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox1 = new javax.swing.JCheckBox();
         SignupPanel = new javax.swing.JPanel();
         SweetLabel2 = new javax.swing.JLabel();
         ManagementLabel2 = new javax.swing.JLabel();
@@ -140,6 +151,46 @@ public class LoginFrame extends javax.swing.JFrame {
         PasswordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PasswordField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         LoginPanel.add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 200, 35));
+
+        SupplierLoginCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SupplierLoginCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
+        SupplierLoginCheckBox1.setText("Supplier");
+        SupplierLoginCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SupplierLoginCheckBox1ActionPerformed(evt);
+            }
+        });
+        LoginPanel.add(SupplierLoginCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, -1, -1));
+
+        OwnerLoginCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        OwnerLoginCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
+        OwnerLoginCheckBox1.setText("Owner");
+        OwnerLoginCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OwnerLoginCheckBox1ActionPerformed(evt);
+            }
+        });
+        LoginPanel.add(OwnerLoginCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, -1, -1));
+
+        UserLoginCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        UserLoginCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
+        UserLoginCheckBox1.setText("User");
+        UserLoginCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserLoginCheckBox1ActionPerformed(evt);
+            }
+        });
+        LoginPanel.add(UserLoginCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
+
+        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
+        jCheckBox1.setText("Show password?");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        LoginPanel.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, -1, -1));
 
         MainTabbedPane.addTab("tab2", LoginPanel);
 
@@ -306,41 +357,121 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>                        
+    private boolean checkIfExists(String filename, String name) {
+    File file = new File(filename);
+    try {
+        Scanner scanner = new Scanner(file);
 
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(",");
+
+            // Check if any part matches the name (ignoring case)
+            for (String part : parts) {
+                if (part.trim().equalsIgnoreCase(name)) {
+                    scanner.close();
+                    return true;
+                }
+            }
+        }
+        scanner.close();
+    } catch (IOException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error reading file: " + filename, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    return false;
+}
     private void UsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
     }                                                 
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
-       
-        if(UsernameTextField.getText().equals("") || PasswordField.getPassword().equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Please enter a valid Username and Password!", null, JOptionPane.ERROR_MESSAGE);
+  
+        String username = UsernameTextField.getText();
+        String password = new String(PasswordField.getPassword()); // Convert char array to String
+
+        // Check if username and password fields are not empty
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter both Username and Password!", null, JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        else if(UsernameTextField.getText().equals("Admin") && PasswordField.getText().equals("123"))
+        if(UsernameTextField.getText().equals("Admin")&& PasswordField.getText().equals("123"))
         {
-           this.dispose();
-           new AdminFrame().setVisible(true);
-        } 
-        else if(UsernameTextField.getText().equals("Supplier") && PasswordField.getText().equals("123"))
-        {
-           this.dispose();
-           new RawMaterialSupplierFrame().setVisible(true);
-        } 
-        else if(UsernameTextField.getText().equals("Owner") && PasswordField.getText().equals("123"))
-        {
-           this.dispose();
-           new StoreOwnerFrame().setVisible(true);
-        } 
-        else if(UsernameTextField.getText().equals("User") && PasswordField.getText().equals("123"))
-        {
-           this.dispose();
-           new UserFrame().setVisible(true);
-        } 
-        else 
-            JOptionPane.showMessageDialog(null, "Please enter a valid Username and Password!", null, JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+            AdminFrame a = new AdminFrame();
+            a.name = UsernameTextField.getText();
+            a.WelcomeAdminLabel.setText("Welcome " + a.name);
+            a.setVisible(true);
+        }
+        else{
+        // Determine the file to check based on selected checkbox
+        String fileName = null;
+        if (UserLoginCheckBox1.isSelected()) {
+            fileName = "Users.txt";
+        } else if (OwnerLoginCheckBox1.isSelected()) {
+            fileName = "Owners.txt";
+        } else if (SupplierLoginCheckBox1.isSelected()) {
+            fileName = "Suppliers.txt";
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a user type.", null, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Authenticate the user
+        if (authenticateUser(fileName, username, password)) {
+            // Open the appropriate frame based on the checkbox
+            if (UserLoginCheckBox1.isSelected()) {
+                this.dispose();
+                UserFrame u= new UserFrame();
+                u.name= UsernameTextField.getText();
+                u.WelcomeUserLabel.setText("Welcome " + u.name);
+                if(checkIfExists("Message_All.txt", u.name))
+                    u.jLabel1.setEnabled(true);
+                else
+                    u.jLabel1.setEnabled(false);
+                u.setVisible(true);
+            } else if (OwnerLoginCheckBox1.isSelected()) {
+                this.dispose();
+                StoreOwnerFrame o =new StoreOwnerFrame();
+                o.name= UsernameTextField.getText();
+                o.WelcomeOwnerLabel.setText("Welcome " + o.name);
+                if(checkIfExists("Message_All.txt", o.name))
+                    o.jLabel1.setEnabled(true);
+                else
+                    o.jLabel1.setEnabled(false);
+                o.setVisible(true);
+            } else if (SupplierLoginCheckBox1.isSelected()) {
+                this.dispose();
+                RawMaterialSupplierFrame s = new RawMaterialSupplierFrame();
+                s.name= UsernameTextField.getText();
+                s.WelcomeSupplierLabel.setText("Welcome " + s.name);
+                if(checkIfExists("Message_All.txt", s.name))
+                    s.jLabel1.setEnabled(true);
+                else
+                    s.jLabel1.setEnabled(false);
+                s.setVisible(true);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid Username or Password!", null, JOptionPane.ERROR_MESSAGE);
+        }
+        }
     }                                        
 
+    private boolean authenticateUser(String fileName, String username, String password) {
+    try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(","); // assuming CSV format: username,password,email,city
+            if (parts.length == 4 && parts[0].equals(username) && parts[1].equals(password)) {
+                return true;
+            }
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error reading file: " + e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+    }
+    return false;
+    }
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {                                          
        MainTabbedPane.setSelectedIndex(1);
     }                                         
@@ -362,10 +493,83 @@ public class LoginFrame extends javax.swing.JFrame {
     }                                                  
 
     private void SignUpBtnSActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        String username = UsernameTextField2.getText();
+        String password = new String(PasswordTextField2.getText());
+        String confirmPassword = new String(ConfirmPassTextField.getText());
+        String email = EmailTextField.getText();
+        String city = (String) CityComboBox.getSelectedItem();
 
+        // Check if all fields are filled
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || email.isEmpty() || city == null || city.equals("Select")) {
+            JOptionPane.showMessageDialog(null, "Please fill in all fields.", null, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Check if passwords match
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(null, "Passwords do not match.", null, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Determine the file to check based on selected checkbox
+        String fileName = null;
+        if (UserCheckBox.isSelected()) {
+            fileName = "Users.txt";
+        } else if (OwnerCheckBox.isSelected()) {
+            fileName = "Owners.txt";
+        } else if (SupplierCheckBox.isSelected()) {
+            fileName = "Suppliers.txt";
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a user type.", null, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Check if the username already exists
+        if (usernameExists(fileName, username)) {
+            JOptionPane.showMessageDialog(null, "Username already exists. Please choose a different username.", null, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Save the new user information
+        if (saveUser(fileName, username, password, email, city)) {
+            JOptionPane.showMessageDialog(null, "Sign up successful.");
+            MainTabbedPane.setSelectedIndex(0);
+            UsernameTextField.setText(UsernameTextField2.getText());
+            PasswordField.setText(PasswordTextField2.getText());
+            // Optionally, clear fields or navigate to another frame
+        } else {
+            JOptionPane.showMessageDialog(null, "Error saving user information.", null, JOptionPane.ERROR_MESSAGE);
+        }
 
     }                                          
 
+    private boolean usernameExists(String fileName, String username) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(","); // assuming CSV format: username,password,email,city
+                if (parts.length >= 1 && parts[0].equals(username)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error reading file: " + e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+    private boolean saveUser(String fileName, String username, String password, String email, String city) {
+        try (FileWriter fw = new FileWriter(fileName, true); // Open file in append mode
+             BufferedWriter bw = new BufferedWriter(fw)) {
+            String line = String.join(",", username, password, email, city+"\n");
+            bw.write(line);    
+            bw.flush();     
+            return true;
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error saving user information: " + e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+    
     private void LoginBtnSActionPerformed(java.awt.event.ActionEvent evt) {                                          
         MainTabbedPane.setSelectedIndex(0);
     }                                         
@@ -387,6 +591,28 @@ public class LoginFrame extends javax.swing.JFrame {
         SupplierCheckBox.setSelected(false);
         UserCheckBox.setSelected(false);
     }                                             
+
+    private void SupplierLoginCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        UserLoginCheckBox1.setSelected(false);
+        OwnerLoginCheckBox1.setSelected(false);
+    }                                                      
+
+    private void OwnerLoginCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        SupplierLoginCheckBox1.setSelected(false);      
+        UserLoginCheckBox1.setSelected(false);
+    }                                                   
+
+    private void UserLoginCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        SupplierLoginCheckBox1.setSelected(false);
+        OwnerLoginCheckBox1.setSelected(false);
+    }                                                  
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        if(jCheckBox1.isSelected())
+        this.PasswordField.setEchoChar((char)0);
+        else
+        this.PasswordField.setEchoChar('*');
+    }                                          
 
     /**
      * @param args the command line arguments
@@ -440,6 +666,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel ManagementLabel;
     private javax.swing.JLabel ManagementLabel2;
     private javax.swing.JCheckBox OwnerCheckBox;
+    private javax.swing.JCheckBox OwnerLoginCheckBox1;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel PasswordLabel;
     private javax.swing.JLabel PasswordLabel2;
@@ -447,14 +674,17 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JButton SignUpBtnS;
     private javax.swing.JPanel SignupPanel;
     private javax.swing.JCheckBox SupplierCheckBox;
+    private javax.swing.JCheckBox SupplierLoginCheckBox1;
     private javax.swing.JLabel SweetLabel;
     private javax.swing.JLabel SweetLabel2;
     private javax.swing.JCheckBox UserCheckBox;
+    private javax.swing.JCheckBox UserLoginCheckBox1;
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JLabel UsernameLabel2;
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JTextField UsernameTextField2;
     private javax.swing.JLabel doesnt;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JButton loginBtn;
     private javax.swing.JButton signUpBtn;
     // End of variables declaration                   

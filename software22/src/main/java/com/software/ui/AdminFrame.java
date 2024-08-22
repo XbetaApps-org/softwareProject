@@ -4,6 +4,14 @@
  */
 package com.software.ui;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Omar Khatib
@@ -16,7 +24,7 @@ public class AdminFrame extends javax.swing.JFrame {
     public AdminFrame() {
         initComponents();
     }
-
+    public String name="";
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,8 +157,13 @@ public class AdminFrame extends javax.swing.JFrame {
         OkButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         OkButton.setForeground(new java.awt.Color(0, 0, 0));
         OkButton.setText("OK");
+        OkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OkButtonActionPerformed(evt);
+            }
+        });
 
-        SolidLineLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Omar Khatib\\Documents\\NetBeansProjects\\Software\\src\\main\\java\\Images\\Line.png")); // NOI18N
+        SolidLineLabel.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\Line.png")); // NOI18N
 
         javax.swing.GroupLayout UserManageToolsLayout = new javax.swing.GroupLayout(UserManageTools);
         UserManageTools.setLayout(UserManageToolsLayout);
@@ -250,17 +263,27 @@ public class AdminFrame extends javax.swing.JFrame {
         MonitoAndRepLabel.setForeground(new java.awt.Color(0, 0, 0));
         MonitoAndRepLabel.setText("Monitoring & Reporting");
 
-        SolidLineLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Omar Khatib\\Documents\\NetBeansProjects\\Software\\src\\main\\java\\Images\\Line.png")); // NOI18N
+        SolidLineLabel1.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\Line.png")); // NOI18N
 
         ProfitsBtn.setBackground(new java.awt.Color(222, 115, 0));
         ProfitsBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         ProfitsBtn.setForeground(new java.awt.Color(0, 0, 0));
         ProfitsBtn.setText("Profits");
+        ProfitsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProfitsBtnActionPerformed(evt);
+            }
+        });
 
         BestSellingBtn.setBackground(new java.awt.Color(222, 115, 0));
         BestSellingBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         BestSellingBtn.setForeground(new java.awt.Color(0, 0, 0));
         BestSellingBtn.setText("Best Selling");
+        BestSellingBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BestSellingBtnActionPerformed(evt);
+            }
+        });
 
         StatisticsBtn.setBackground(new java.awt.Color(222, 115, 0));
         StatisticsBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -332,17 +355,27 @@ public class AdminFrame extends javax.swing.JFrame {
         ContentMngLabel.setForeground(new java.awt.Color(0, 0, 0));
         ContentMngLabel.setText("Content Management");
 
-        SolidLineLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Omar Khatib\\Documents\\NetBeansProjects\\Software\\src\\main\\java\\Images\\Line.png")); // NOI18N
+        SolidLineLabel2.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\Line.png")); // NOI18N
 
         ShowPostsBtn.setBackground(new java.awt.Color(222, 115, 0));
         ShowPostsBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         ShowPostsBtn.setForeground(new java.awt.Color(0, 0, 0));
         ShowPostsBtn.setText("Show Posts");
+        ShowPostsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowPostsBtnActionPerformed(evt);
+            }
+        });
 
         ShowRecipesBtn.setBackground(new java.awt.Color(222, 115, 0));
         ShowRecipesBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         ShowRecipesBtn.setForeground(new java.awt.Color(0, 0, 0));
         ShowRecipesBtn.setText("Show Recipes");
+        ShowRecipesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowRecipesBtnActionPerformed(evt);
+            }
+        });
 
         ContentMngTextArea.setEditable(false);
         ContentMngTextArea.setColumns(20);
@@ -462,7 +495,7 @@ public class AdminFrame extends javax.swing.JFrame {
             }
         });
 
-        CakeImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\Omar Khatib\\Documents\\NetBeansProjects\\Software\\src\\main\\java\\Images\\cake (1).png")); // NOI18N
+        CakeImage.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\cake (1).png")); // NOI18N
 
         CE121Label.setBackground(new java.awt.Color(0, 0, 0));
         CE121Label.setFont(new java.awt.Font("Pristina", 1, 14)); // NOI18N
@@ -520,7 +553,7 @@ public class AdminFrame extends javax.swing.JFrame {
 
         getContentPane().add(AdminBtnsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 800));
 
-        BackgroundImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\Omar Khatib\\Documents\\NetBeansProjects\\Software\\src\\main\\java\\Images\\Background2.jpg")); // NOI18N
+        BackgroundImage.setIcon(new javax.swing.ImageIcon("src\\main\\resources\\Images\\Background2.jpg")); // NOI18N
 
         javax.swing.GroupLayout BackgroundPanelLayout = new javax.swing.GroupLayout(BackgroundPanel);
         BackgroundPanel.setLayout(BackgroundPanelLayout);
@@ -548,7 +581,110 @@ public class AdminFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>                        
+    private String getFileName(String userType) {
+        switch (userType) {
+            case "User":
+                return "Users.txt";
+            case "Store Owner":
+                return "Owners.txt";
+            case "Supplier":
+                return "Suppliers.txt";
+            default:
+                return null;
+        }
+    }
+    private void addEntry(String fileName) throws IOException {
+     List<String> lines = Files.readAllLines(Paths.get(fileName));
+    String username = UserMngUsernameTxt.getText();
+    boolean exists = false;
 
+    // Check if the username already exists
+    for (String line : lines) {
+        if (line.startsWith(username + ",")) {
+            exists = true;
+            break;
+        }
+    }
+
+    if (exists) {
+        JOptionPane.showMessageDialog(this, "Username already exists. Please choose a different username.");
+    } else {
+        // If the username doesn't exist, add the new entry
+        String newEntry = String.format("%s,%s,%s,%s",
+                username,
+                UserMngPasswordTxt.getText(),
+                UserMngEmailTxt.getText(),
+                UserMngCityTxt.getText());
+        
+        Files.write(Paths.get(fileName), (newEntry + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
+        JOptionPane.showMessageDialog(this, "User Added Successfully.");
+        
+        // Clear the text fields
+        UserMngUsernameTxt.setText("");
+        UserMngPasswordTxt.setText("");
+        UserMngEmailTxt.setText("");
+        UserMngCityTxt.setText("");
+    }
+}
+    private void editEntry(String fileName) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(fileName));
+        String username = UserMngUsernameTxt.getText();
+        boolean found = false;
+
+        for (int i = 0; i < lines.size(); i++) {
+            if (lines.get(i).startsWith(username + ",")) {
+                String updatedEntry = String.format("%s,%s,%s,%s",
+                        username,
+                        UserMngPasswordTxt.getText(),
+                        UserMngEmailTxt.getText(),
+                        UserMngCityTxt.getText());
+                lines.set(i, updatedEntry);
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            Files.write(Paths.get(fileName), lines);
+            JOptionPane.showMessageDialog(this, "The User Updated Successfully.");
+            UserMngUsernameTxt.setText("");
+            UserMngPasswordTxt.setText("");
+            UserMngEmailTxt.setText("");
+            UserMngCityTxt.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "The User Not Found.");
+        }
+    }
+    private void deleteEntry(String fileName) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(fileName));
+        String username = UserMngUsernameTxt.getText();
+        List<String> updatedLines = lines.stream()
+                .filter(line -> !line.startsWith(username + ","))
+                .collect(Collectors.toList());
+
+        if (updatedLines.size() < lines.size()) {
+            // Show confirmation dialog
+            int confirm = JOptionPane.showConfirmDialog(this,
+                    "Are you sure you want to delete the user " + username + "?",
+                    "Confirm Deletion",
+                    JOptionPane.YES_NO_OPTION);
+
+            // If the user confirms the deletion
+            if (confirm == JOptionPane.YES_OPTION) {
+                Files.write(Paths.get(fileName), updatedLines);
+                JOptionPane.showMessageDialog(this, "The User Deleted Successfully.");
+                UserMngUsernameTxt.setText("");
+                UserMngPasswordTxt.setText("");
+                UserMngEmailTxt.setText("");
+                UserMngCityTxt.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Deletion cancelled.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "The User Not Found.");
+        }
+    }
+    
     private void UserMngBtnActionPerformed(java.awt.event.ActionEvent evt) {                                           
         AdminTabbedPane.setSelectedIndex(1);
     }                                          
@@ -559,6 +695,7 @@ public class AdminFrame extends javax.swing.JFrame {
 
     private void ContentMngBtnActionPerformed(java.awt.event.ActionEvent evt) {                                              
          AdminTabbedPane.setSelectedIndex(3);
+         ContentMngTextArea.setText("");
     }                                             
 
     private void WelcomeAdminLabelMouseClicked(java.awt.event.MouseEvent evt) {                                               
@@ -570,6 +707,116 @@ public class AdminFrame extends javax.swing.JFrame {
         new LoginFrame().setVisible(true);
     }                                         
 
+    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        String selectedUserType = (String) UserComboBox.getSelectedItem();
+    String selectedOperation = (String) AddEditDeleteComboBox.getSelectedItem();
+    String fileName = getFileName(selectedUserType);
+
+    // Validate that all fields are filled
+    if (UserMngUsernameTxt.getText().trim().isEmpty() ||
+        UserMngPasswordTxt.getText().trim().isEmpty() ||
+        UserMngEmailTxt.getText().trim().isEmpty() ||
+        UserMngCityTxt.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+        return;
+    }
+
+    if (fileName == null) {
+        JOptionPane.showMessageDialog(this, "Invalid type selected.");
+        return;
+    }
+
+    try {
+        if ("Add".equalsIgnoreCase(selectedOperation)) {
+            addEntry(fileName);
+        } else if ("Edit".equalsIgnoreCase(selectedOperation)) {
+            editEntry(fileName);
+        } else if ("Delete".equalsIgnoreCase(selectedOperation)) {
+            deleteEntry(fileName);
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid operation selected.");
+        }
+    } catch (IOException ex) {
+        JOptionPane.showMessageDialog(this, "Error processing the operation: " + ex.getMessage());
+    }
+    }                                        
+
+    private void ProfitsBtnActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        try {
+            List<String> profits = Files.readAllLines(Paths.get("profits.txt"));
+            if (profits.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No profits recorded yet.");
+            } else {
+                StringBuilder profitsMessage = new StringBuilder("All Recorded Profits:\n");
+                for (String profit : profits) {
+                    profitsMessage.append(profit).append("\n");
+                }
+                JOptionPane.showMessageDialog(this, profitsMessage.toString());
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error reading profits file: " + ex.getMessage());
+        }
+    }                                          
+
+    private void BestSellingBtnActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        try {
+        List<String> profits = Files.readAllLines(Paths.get("profits.txt"));
+        if (profits.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No sales recorded yet.");
+            return;
+        }
+        
+        String bestSellingProduct = null;
+        int maxSales = 0;
+        String bestSellingInfo = null;
+
+        for (String line : profits) {
+            String[] parts = line.split(",");
+            if (parts.length == 3) {
+                String productName = parts[0].trim();
+                int sales = Integer.parseInt(parts[1].trim());
+                String moneyAchieved = parts[2].trim();
+
+                if (sales > maxSales) {
+                    maxSales = sales;
+                    bestSellingProduct = productName;
+                    bestSellingInfo = String.format("Product: %s\nNumber of Sales: %d\nMoney Achieved: %s.00$", 
+                                                     productName, sales, moneyAchieved);
+                }
+            }
+        }
+        
+        if (bestSellingProduct != null) {
+            JOptionPane.showMessageDialog(this, "Best-Selling Product:\n" + bestSellingInfo);
+        } else {
+            JOptionPane.showMessageDialog(this, "Could not determine the best-selling product.");
+        }
+    } catch (IOException ex) {
+        JOptionPane.showMessageDialog(this, "Error reading profits file: " + ex.getMessage());
+    }
+    }                                              
+
+    private void ShowPostsBtnActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        try {
+        List<String> posts = Files.readAllLines(Paths.get("UserPosts.txt"));
+        String content = String.join("\n", posts);
+        ContentMngTextArea.setText(content);
+        } catch (IOException ex) {
+        JOptionPane.showMessageDialog(this, "Error reading UserPosts.txt: " + ex.getMessage());
+        }
+    }                                            
+
+    private void ShowRecipesBtnActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        try {
+        List<String> recipes = Files.readAllLines(Paths.get("UserRecipes.txt"));
+        String content = String.join("\n", recipes);
+        ContentMngTextArea.setText(content);
+        } catch (IOException ex) {
+        JOptionPane.showMessageDialog(this, "Error reading UserRecipes.txt: " + ex.getMessage());
+        }   
+    }                                              
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -645,7 +892,7 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JTextField UserMngPasswordTxt;
     private javax.swing.JTextField UserMngUsernameTxt;
     private javax.swing.JLabel UsernameLabel;
-    private javax.swing.JLabel WelcomeAdminLabel;
+    public javax.swing.JLabel WelcomeAdminLabel;
     private javax.swing.JPanel WelcomePanel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration                   

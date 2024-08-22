@@ -1,0 +1,17 @@
+Owner,Supplier,Product,Count
+q,Owner,CheaseCake,7
+q,Owner,Cupcake,7
+q,Owner,Icecream,3
+Owner,Supplier,Cupcake,7
+Owner,Supplier,Cupcake,2
+Owner,Supplier,Cupcake,1
+osaid,Ali,CheaseCake,3
+w,Ali,CheaseCake,2
+osaid,Ali,CheaseCake,2
+osaid,Ali,btata,3
+osaid,Ali,CheaseCake,2
+osaid,Ali,CheaseCake,4
+Owner,Ali,CheaseCake,5
+Owner,Ali,CheaseCake,33
+Owner,Osaid,btata,2
+User,Ali,Cake,2

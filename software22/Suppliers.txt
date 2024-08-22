@@ -1,0 +1,4 @@
+Supplier,Pass,Email,City
+Ali,3,qqqq,Jenin
+Osaid,3333,qqqq,Jenin
+Ali2,q,w, Bethlehem

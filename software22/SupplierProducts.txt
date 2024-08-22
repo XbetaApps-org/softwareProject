@@ -1,0 +1,8 @@
+SupplierName,Product,Price,isAllergic,Count
+Mohammed,5as,100,true,9
+Saed,mm,100,false,5
+Ali,CheaseCake,200,true,44
+Ali,Icecream,200,true,44
+Ali,CheaseCake,200,true,44
+Ali2,Moka,200,true,44
+Osaid,btata,100,true,5
